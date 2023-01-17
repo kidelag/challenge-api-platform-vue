@@ -4,7 +4,6 @@ namespace App\State;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use App\Entity\Token;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class UserAccountCreate implements ProcessorInterface
@@ -28,7 +27,6 @@ final class UserAccountCreate implements ProcessorInterface
         $data->setUpdatedAt(new \DateTime());
         $data->setLastActivity(new \DateTime());
         $data->setValid(false);
-        $data->eraseCredentials();
 
         return $this->processor->process($data, $operation, $uriVariables, $context);
     }

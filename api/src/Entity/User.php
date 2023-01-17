@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Unique;
 
 #[ApiResource(
     normalizationContext: ['groups' => ['read']],
@@ -48,6 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Unique]
     #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
@@ -75,6 +77,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read'])]
     #[ORM\Column]
     private ?bool $valid = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $token = null;
 
     public function __construct()
     {
@@ -221,6 +226,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setValid(bool $valid): self
     {
         $this->valid = $valid;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }
