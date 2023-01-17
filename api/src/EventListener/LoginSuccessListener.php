@@ -17,10 +17,10 @@ class LoginSuccessListener
         }
         // Add information to user payload
         $payload += [
-            'username' => $user->getUsername(),
             'email' => $user->getMail(),
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
+            'valid' => $user->isValid()
         ];
         $event->setData($payload);
     }
