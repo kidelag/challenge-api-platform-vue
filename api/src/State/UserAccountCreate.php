@@ -4,9 +4,10 @@ namespace App\State;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use App\Entity\Token;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final class UserPasswordHasher implements ProcessorInterface
+final class UserAccountCreate implements ProcessorInterface
 {
     public function __construct(private ProcessorInterface $processor, private UserPasswordHasherInterface $passwordHasher)
     {
@@ -23,6 +24,10 @@ final class UserPasswordHasher implements ProcessorInterface
             $data->getPassword()
         );
         $data->setPassword($hashedPassword);
+        $data->setCreatedAt(new \DateTime());
+        $data->setUpdatedAt(new \DateTime());
+        $data->setLastActivity(new \DateTime());
+        $data->setValid(false);
         $data->eraseCredentials();
 
         return $this->processor->process($data, $operation, $uriVariables, $context);

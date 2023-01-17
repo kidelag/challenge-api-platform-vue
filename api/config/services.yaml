@@ -24,8 +24,12 @@ services:
         decorates: 'api_platform.openapi.factory'
         arguments: ['@.inner']
     
-    App\State\UserPasswordHasher:
+    App\State\UserAccountCreate:
         bind:
             $processor: '@api_platform.doctrine.orm.state.persist_processor'
+            
+    App\EventListener\LoginSuccessListener:
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onLoginSuccess }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
