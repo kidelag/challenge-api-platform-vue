@@ -20,7 +20,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
 )]
-#[Get]
+#[Get(
+    security: 'is_granted("IS_AUTHENTICATED_FULLY") and object === user'
+)]
 #[GetCollection]
 #[Post(
     processor: UserAccountCreate::class
