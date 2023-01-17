@@ -7,21 +7,24 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
+use App\State\UserAccountCreate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\State\UserPasswordHasher;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource(operations: [
-    new Get(),
-    new Post(
-        processor: UserPasswordHasher::class,
-    ),
-    new GetCollection()
-])]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
+#[Get]
+#[GetCollection]
+#[Post(
+    processor: UserAccountCreate::class
+)]
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -32,53 +35,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
+    #[Groups(['read'])]
     #[ORM\Column]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
+    #[Groups(['write'])]
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
+    #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
+    #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $lastActivity = null;
 
-    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
-    private ?Token $token = null;
-
-    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
-    private ?Former $former = null;
-
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Course::class, orphanRemoval: true)]
-    private Collection $courses;
-
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Comment::class, orphanRemoval: true)]
-    private Collection $comments;
-
-    #[ORM\ManyToMany(targetEntity: UserCourse::class, mappedBy: 'user_id')]
-    private Collection $userCourses;
-
+    #[Groups(['read'])]
     #[ORM\Column]
-    private ?bool $valid = null;
+    private ?bool $valid = false;
 
     public function __construct()
     {
@@ -225,127 +223,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastActivity(?\DateTimeInterface $lastActivity): self
     {
         $this->lastActivity = $lastActivity;
-
-        return $this;
-    }
-
-    public function getToken(): ?Token
-    {
-        return $this->token;
-    }
-
-    public function setToken(Token $token): self
-    {
-        // set the owning side of the relation if necessary
-        if ($token->getUserId() !== $this) {
-            $token->setUserId($this);
-        }
-
-        $this->token = $token;
-
-        return $this;
-    }
-
-    public function getFormer(): ?Former
-    {
-        return $this->former;
-    }
-
-    public function setFormer(Former $former): self
-    {
-        // set the owning side of the relation if necessary
-        if ($former->getUserId() !== $this) {
-            $former->setUserId($this);
-        }
-
-        $this->former = $former;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Course>
-     */
-    public function getCourses(): Collection
-    {
-        return $this->courses;
-    }
-
-    public function addCourse(Course $course): self
-    {
-        if (!$this->courses->contains($course)) {
-            $this->courses->add($course);
-            $course->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCourse(Course $course): self
-    {
-        if ($this->courses->removeElement($course)) {
-            // set the owning side to null (unless already changed)
-            if ($course->getUserId() === $this) {
-                $course->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-            $comment->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getUserId() === $this) {
-                $comment->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, UserCourse>
-     */
-    public function getUserCourses(): Collection
-    {
-        return $this->userCourses;
-    }
-
-    public function addUserCourse(UserCourse $userCourse): self
-    {
-        if (!$this->userCourses->contains($userCourse)) {
-            $this->userCourses->add($userCourse);
-            $userCourse->addUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserCourse(UserCourse $userCourse): self
-    {
-        if ($this->userCourses->removeElement($userCourse)) {
-            $userCourse->removeUserId($this);
-        }
 
         return $this;
     }
