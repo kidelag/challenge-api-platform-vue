@@ -1,6 +1,15 @@
+<script setup>
+import { onMounted } from "vue";
+import { checkConnection } from "../utils/checkConnection";
+
+onMounted(() => {
+  checkConnection();
+});
+</script>
+
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>SIIIKE</h1>
   </div>
 </template>
 

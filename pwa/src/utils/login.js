@@ -2,30 +2,30 @@ import axios from "axios";
 import router from "./../router";
 import { store } from "../store/store";
 
-export const login = (username, password) => {
-  console.log("debug", username, password);
+export const login = (mail, password) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("https://localhost/auth", {
+        mail: mail,
+        password: password,
+      })
+      .then(({ data }) => {
+        // Récupération du jeton de l'API
 
-  axios
-    .post("https://localhost/auth", {
-      username: username,
-      password: password,
-    })
-    .then(({ data }) => {
-      // Récupération du jeton de l'API
-      console.log("debug login successfull", data);
+        const { token, ...user } = data;
 
-      const { token, ...user } = data;
+        store.setConnected(true);
+        store.setUser(user);
 
-      store.setConnected(true);
-      //   store.setUser(user);
-
-      // Enregistrement du jeton dans le stockage local
-      localStorage.setItem("TOKEN", token);
-      // redirection vers la page d'accueil
-      router.push("/");
-    })
-    .catch((error) => {
-      // Gestion des erreurs
-      console.log(error);
-    });
+        // Enregistrement du jeton dans le stockage local
+        localStorage.setItem("TOKEN", `${user.user_id} ${token}`);
+        // redirection vers la page d'accueil
+        router.push("/");
+        resolve();
+      })
+      .catch((error) => {
+        // Gestion des erreurs
+        reject(error);
+      });
+  });
 };
