@@ -21,7 +21,7 @@ class CreateAccountController extends AbstractController
         $request = $this->requestStack->getCurrentRequest();
         $datas = json_decode($request->getContent());
         $user = new User();
-        $user->setUsername($datas->username)
+        $user->setMail($datas->mail)
              ->setRoles($datas->role)
              ->setPassword($this->passwordHasher->hashPassword($user, $datas->password));
         return $user;

@@ -6,6 +6,8 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use App\Controller\ValidateAccountController;
 use App\Repository\UserRepository;
 use App\State\UserAccountCreate;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,6 +30,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[GetCollection]
 #[Post(
     processor: UserAccountCreate::class
+)]
+#[Get(
+    uriTemplate: '/user/validate',
+    defaults: ['identifiedBy' => 'token'],
+    controller: ValidateAccountController::class,
+    openapiContext: ['parameters' => [
+        ['name' => 'token', 'in' => 'query', 'required' => true]
+    ]],
+    read: false,
+    name: 'validate'
 )]
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
