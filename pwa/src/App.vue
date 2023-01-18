@@ -13,8 +13,6 @@ const handleLogout = () => {
 
   store.reset();
   router.push("/");
-
-  console.log("debug", store.user.isConnected);
 };
 
 const modalRef = ref(null);

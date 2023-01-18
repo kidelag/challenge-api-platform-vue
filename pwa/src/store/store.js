@@ -9,7 +9,7 @@ const initStore = {
     firstname: "",
     lastname: "",
   },
-  courses: [],
+  courses: { array: [], selected: null },
 };
 
 export const store = reactive({
@@ -27,8 +27,12 @@ export const store = reactive({
     this.user.lastname = user.lastname;
   },
   setCourses(courses) {
-    this.courses = courses;
+    this.courses.array = courses;
   },
+  selectCourse(index) {
+    this.courses.selected = index;
+  },
+
   reset() {
     this.user.isValid = false;
     this.user.isConnected = false;
@@ -39,13 +43,19 @@ export const store = reactive({
   },
 });
 
-export const getCourse = (id) => {
-  const storeJS = toRaw(store);
-  const course = storeJS.courses.find((course) => {
-    return course.id === parseInt(id);
-  });
+export const selectCourse = (id) => {
+  const courses = toRaw(store.courses.array);
+  const courseIndex = courses.findIndex((course) => course.id === parseInt(id));
 
-  console.log("debug", storeJS.courses);
+  store.selectCourse(courseIndex);
+};
 
-  return course;
+export const setBuyCourse = (id) => {
+  const courses = toRaw(store.courses.array);
+  console.log("debug", courses[1].possessed);
+  const courseIndex = courses.findIndex((course) => course.id === parseInt(id));
+
+  courses[courseIndex].possessed = true;
+
+  store.courses.array.splice(courseIndex, 1, courses[courseIndex]);
 };

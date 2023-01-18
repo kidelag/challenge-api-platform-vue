@@ -20,7 +20,7 @@ export const login = (mail, password) => {
         // Enregistrement du jeton dans le stockage local
         localStorage.setItem("TOKEN", `${user.user_id} ${token}`);
         // redirection vers la page d'accueil
-        router.push("/");
+
         resolve();
       })
       .catch((error) => {

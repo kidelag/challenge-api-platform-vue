@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 import { checkConnection } from "../utils/checkConnection";
 
 onMounted(() => {
-  checkConnection();
+  checkConnection(false, "about");
 });
 </script>
 

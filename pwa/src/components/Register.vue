@@ -55,7 +55,7 @@ import router from "../router";
 import { checkConnection } from "../utils/checkConnection";
 
 onMounted(() => {
-  checkConnection(true);
+  checkConnection(true, "register");
 });
 
 const initialValue = {

@@ -2,7 +2,8 @@ import axios from "axios";
 import router from "../router";
 import { store } from "../store/store";
 
-export const checkConnection = (withRedirectOnConnect) => {
+export const checkConnection = (withRedirectOnConnect, from) => {
+  // console.log("debug here", from);
   if (!store.user.isConnected) {
     const tokenRaw = localStorage.getItem("TOKEN");
 

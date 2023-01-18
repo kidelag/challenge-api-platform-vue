@@ -2,7 +2,7 @@
 import router from "../router";
 import { store } from "../store/store";
 
-const items = store.courses;
+const items = store.courses.array;
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const items = store.courses;
           <p class="card-text">{{ item.description }}</p>
           <router-link
             v-if="item.possessed"
-            :to="`/detail/${item.id}`"
+            :to="`/course/${item.id}`"
             class="btn btn-outline-primary"
             >Reprendre ce cours</router-link
           >
