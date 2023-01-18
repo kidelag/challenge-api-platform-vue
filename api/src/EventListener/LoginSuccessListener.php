@@ -18,8 +18,8 @@ class LoginSuccessListener
             return;
         }
 
-        if(false === $user->isValid()) {
-            throw new AccessDeniedHttpException('Please confirm your account', null, '403');
+        if (false === $user->isValid()) {
+            throw new AccessDeniedHttpException('Please confirm your account with the email we sent you', null, '403');
         }
         // Add information to user payload
         $payload += [

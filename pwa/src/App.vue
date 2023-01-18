@@ -42,7 +42,7 @@ initData();
             <RouterLink to="/" class="nav-link">Home</RouterLink>
           </li>
           <li class="nav-item" v-if="store.user.isConnected">
-            <RouterLink to="/about" class="nav-link">Vos cours</RouterLink>
+            <RouterLink to="/dashboard" class="nav-link">Vos cours</RouterLink>
           </li>
         </ul>
         <div class="d-flex">

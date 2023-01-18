@@ -2,12 +2,14 @@ import { reactive, toRaw } from "vue";
 
 const initStore = {
   user: {
-    isValid: false,
-    isConnected: false,
+    isValid: true,
+    isConnected: true,
     id: 0,
     mail: "",
     firstname: "",
     lastname: "",
+    isAdmin: false,
+    isTeacher: true,
   },
   courses: { array: [], selected: null },
 };

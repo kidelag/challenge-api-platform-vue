@@ -55,12 +55,12 @@ import router from "../router";
 import { checkConnection } from "../utils/checkConnection";
 
 onMounted(() => {
-  checkConnection(true, "register");
+  checkConnection(false, "register");
 });
 
 const initialValue = {
   password: "test",
-  mail: "test@test.com",
+  mail: "dragnir19@gmail.com",
   firstname: "Firs",
   lastname: "Last",
 };
