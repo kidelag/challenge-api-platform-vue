@@ -19,7 +19,7 @@ class LoginSuccessListener
         }
 
         if(false === $user->isValid()) {
-            throw new AccessDeniedHttpException('User is not valid', null, '403');
+            throw new AccessDeniedHttpException('Please confirm your account', null, '403');
         }
         // Add information to user payload
         $payload += [
