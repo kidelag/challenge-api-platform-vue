@@ -39,8 +39,14 @@ services:
       - ./api/docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
     environment:
       MERCURE_EXTRA_DIRECTIVES: demo
-
-###> doctrine/doctrine-bundle ###
+  
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+  
+  
+  ###> doctrine/doctrine-bundle ###
   database:
     ports:
       - target: 5432
