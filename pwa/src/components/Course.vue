@@ -1,20 +1,27 @@
 <script setup>
-import { onMounted, watch, computed, toRaw } from "vue";
+import { onMounted, ref, computed, watchEffect } from "vue";
 import { store, setBuyCourse } from "../store/store";
 import router from "../router";
 import { checkConnection } from "../utils/checkConnection";
 
 const courseId = router.currentRoute.value.params.id;
 
+const courses = ref({});
 const course = computed(() => {
-  return store.courses.array[store.courses.selected];
+  return store.courses.selected ? courses.value[store.courses.selected] : {};
+});
+
+watchEffect(() => {
+  courses.value = store.courses.list;
+  console.log(course.value);
 });
 
 onMounted(() => {
   checkConnection(false, "Detail");
   store.selectCourse(courseId);
 
-  if (!course.value.possessed) router.push(`/detail/${courseId}`);
+  if (typeof course.value.possessed === "boolean" && !course.value.possessed)
+    router.push(`/detail/${courseId}`);
 });
 </script>
 

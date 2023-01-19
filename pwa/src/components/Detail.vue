@@ -12,7 +12,6 @@ const course = computed(() => {
 
 watchEffect(() => {
   courses.value = store.courses.list;
-  console.log("here", courses.value);
 });
 
 onMounted(() => {
