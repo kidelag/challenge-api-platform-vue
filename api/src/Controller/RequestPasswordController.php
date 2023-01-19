@@ -45,7 +45,7 @@ class RequestPasswordController extends AbstractController
                     'Cliquez sur le lien suivant pour réinitialiser votre mot de passe : <a href="'.$link.'">Réinitialisez votre mot de passe</a>'
                 );
         } catch(\Exception $e) {
-            return new HttpException('404', $e->getMessage());
+            return new JsonResponse($e->getMessage(), '404');
         }
         return new JsonResponse('Un email vous a été envoyé, avec un lien pour réinitialiser votre mot de passe', '200');
     }

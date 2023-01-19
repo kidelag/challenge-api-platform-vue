@@ -41,7 +41,7 @@ class ValidateAccountController extends AbstractController
             $this->manager->persist($user);
             $this->manager->flush();
         } catch(\Exception $e) {
-            return new HttpException('404', $e->getMessage());
+            return new JsonResponse($e->getMessage(), '401');
         }
         return new JsonResponse('Votre compte a été validé, vous pouvez maintenant vous connecter', '200');
     }
