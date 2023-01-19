@@ -32,6 +32,11 @@ const router = createRouter({
       name: "course",
       component: () => import("../components/Course.vue"),
     },
+    {
+      path: "/validate/:token",
+      name: "validate",
+      component: () => import("../components/Validate.vue"),
+    },
   ],
 });
 

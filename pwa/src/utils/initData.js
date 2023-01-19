@@ -1,40 +1,37 @@
-import { store } from "../store/store";
+import { listCourses, store } from "../store/store";
+import axios from "axios";
 
 const getItems = () => {
-  const items = [
-    {
-      id: 1,
-      title: "Cours de Php",
-      description: "Cours pas ouf mais azy t'as pas le choix",
-      possessed: true,
-      pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
-    },
-    {
-      id: 2,
-      title: "Cours de Php",
-      description: "Cours pas ouf mais azy t'as pas le choix",
-      possessed: false,
-      pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
-    },
-    {
-      id: 3,
-      title: "Cours de Php",
-      description: "Cours pas ouf mais azy t'as pas le choix",
-      possessed: true,
-      pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
-    },
-    {
-      id: 4,
-      title: "Cours de Php",
-      description: "Cours pas ouf mais azy t'as pas le choix",
-      possessed: false,
-      pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
-    },
-  ];
+  return new Promise((resolve, reject) => {
+    const list = {};
 
-  return items;
+    axios
+      .get("https://localhost/courses")
+      .then(({ data }) => {
+        data["hydra:member"].map((item) => {
+          list[item.id] = {
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            possessed: false,
+            pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
+          };
+        });
+
+        resolve(list);
+      })
+      .catch((err) => {
+        console.log("debug init data", err);
+        reject(err);
+      });
+  });
 };
 
-export const initData = () => {
-  store.setCourses(getItems());
+export const initData = async () => {
+  const courses = await getItems();
+  console.log("debug", courses);
+
+  listCourses.value = courses;
+
+  console.log("debug", store.courses.list);
 };

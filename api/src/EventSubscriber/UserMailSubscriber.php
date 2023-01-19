@@ -26,7 +26,6 @@ class UserMailSubscriber implements EventSubscriberInterface
 
     public function __construct(private EntityManagerInterface $manager, private MailerInterface $mailer)
     {
-
     }
 
     public static function getSubscribedEvents()
@@ -54,13 +53,13 @@ class UserMailSubscriber implements EventSubscriberInterface
         $this->manager->persist($user);
         $this->manager->flush();
 
-        $link = 'http://localhost:8080/validate?token='.$user->getToken();
+        $link = 'http://localhost:8080/validate/' . $user->getToken();
         $mail = (new Email())
             ->to($user->getMail())
             ->from('no-reply@challenge.fr')
             ->subject('eLearning - Vérifiez votre compte')
             ->html(
-                'Merci de vérifier votre compte en cliquant sur le lien suivant : <a href="'.$link.'">Vérifiez votre compte</a>'
+                'Merci de vérifier votre compte en cliquant sur le lien suivant : <a href="' . $link . '">Vérifiez votre compte</a>'
             );
 
         $this->mailer->send($mail);

@@ -1,8 +1,13 @@
 <script setup>
 import router from "../router";
 import { store } from "../store/store";
+import { ref, isReactive, watchEffect } from "vue";
 
-const items = store.courses.array;
+const items = ref({});
+
+watchEffect(() => {
+  items.value = store.courses.list;
+});
 </script>
 
 <template>

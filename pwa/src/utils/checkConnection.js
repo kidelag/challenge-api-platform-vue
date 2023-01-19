@@ -26,7 +26,6 @@ export const checkConnection = (withRedirectOnConnect, from) => {
           if (withRedirectOnConnect) router.push("/");
         });
     } else {
-      console.log("dbeug", withRedirectOnConnect);
       if (withRedirectOnConnect) router.push("/");
     }
   }
