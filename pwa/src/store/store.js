@@ -8,7 +8,7 @@ const initStore = {
     mail: "",
     firstname: "",
     lastname: "",
-    isAdmin: false,
+    isAdmin: true,
     isTeacher: true,
   },
   courses: { array: [], selected: null },

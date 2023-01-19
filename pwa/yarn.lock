@@ -2,6 +2,26 @@
 # yarn lockfile v1
 
 
+"@ag-grid-community/client-side-row-model@^28.1.1":
+  version "28.2.1"
+  resolved "https://registry.npmmirror.com/@ag-grid-community/client-side-row-model/-/client-side-row-model-28.2.1.tgz#faa74e225f2f27f38e6473c5e0d47514db4aac58"
+  integrity sha512-JLLNVNAtSbVjg/h0+JqNxbRGzHR9xl3YHO4kVt8Bu0UO1XQLfGLT8wkzqQTcEOiq0pEfFTee7/BGT3oHOQfUQg==
+  dependencies:
+    "@ag-grid-community/core" "~28.2.1"
+
+"@ag-grid-community/core@^28.1.1", "@ag-grid-community/core@~28.2.1":
+  version "28.2.1"
+  resolved "https://registry.npmmirror.com/@ag-grid-community/core/-/core-28.2.1.tgz#a74f5b724c89c0f69ef4af72964a274a25b93089"
+  integrity sha512-qGhqZhY8KbPlr3cJBVkNjGKu+cOyFc8IGvPcvlm0pjNC9cdxO/ct9Sa1Dg+k3ACCEroMEt1apBvnoOgurpvewQ==
+
+"@ag-grid-community/vue3@^28.1.1":
+  version "28.2.1"
+  resolved "https://registry.npmmirror.com/@ag-grid-community/vue3/-/vue3-28.2.1.tgz#b91e93208ef404a9f9c0ac505b836f87403c848e"
+  integrity sha512-XxVN+GinQuCbNLk1KKfSDvCSy0uMUaBdYkOvbdUQNRhYjjw07GXI2EnCGaLV7CrPuT9LzwprPfL/rQgJ8pT6pA==
+  dependencies:
+    "@ag-grid-community/core" "~28.2.1"
+    vue "^3.0.0"
+
 "@babel/parser@^7.16.4":
   version "7.20.7"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.20.7.tgz#66fe23b3c8569220817d5feb8b9dcdc95bb4f71b"
@@ -126,6 +146,11 @@
     consola "^2.15.0"
     node-fetch "^2.6.7"
 
+"@types/lodash@^4.14.161":
+  version "4.14.191"
+  resolved "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
+  integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
+
 "@vitejs/plugin-vue@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-4.0.0.tgz#93815beffd23db46288c787352a8ea31a0c03e5e"
@@ -226,6 +251,15 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
+"@vuestic/ag-grid-theme@^1.0.3":
+  version "1.1.3"
+  resolved "https://registry.npmmirror.com/@vuestic/ag-grid-theme/-/ag-grid-theme-1.1.3.tgz#83188240997aa3bbd57226654789781018bc664c"
+  integrity sha512-xgO6oMaRBguLJ+t2BuOTV4AWMsfRQCXvGvPWfDqN/aJiYY/+QexYZbPwjiwjV7gY3JXc1BLqkMQ1ui2dbWp8Ng==
+  dependencies:
+    "@ag-grid-community/client-side-row-model" "^28.1.1"
+    "@ag-grid-community/core" "^28.1.1"
+    "@ag-grid-community/vue3" "^28.1.1"
+
 ansi-styles@^4.1.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-4.3.0.tgz#edd803628ae71c04c85ae7a0906edad34b648937"
@@ -276,6 +310,11 @@ chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+cleave.js@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.npmmirror.com/cleave.js/-/cleave.js-1.6.0.tgz#0e4e011943bdd70c67c9dcf4ff800ce710529171"
+  integrity sha512-ivqesy3j5hQVG3gywPfwKPbi/7ZSftY/UNp5uphnqjr25yI2CP8FS2ODQPzuLXXnNLi29e2+PgPkkiKUXLs/Nw==
+
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
@@ -287,6 +326,11 @@ color-name@~1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+
+colortranslator@^1.9.2:
+  version "1.10.2"
+  resolved "https://registry.npmmirror.com/colortranslator/-/colortranslator-1.10.2.tgz#0a02b75f8c6cf50b50feb119ddccfbce1111f7f7"
+  integrity sha512-+vAnjWTdI0Vh6fT3I+dA6DAtnLfo91TzYKjewYeZ2dHdhF8Yo5OMo47inNJdJOXwjJ9lPD0LkNeQOLU/8yyfZA==
 
 combined-stream@^1.0.8:
   version "1.0.8"
@@ -494,6 +538,11 @@ is-core-module@^2.9.0:
   dependencies:
     has "^1.0.3"
 
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
 magic-string@^0.25.7:
   version "0.25.9"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.9.tgz#de7f9faf91ef8a1c91d02c2e5314c8277dbcdd1c"
@@ -619,6 +668,11 @@ vite@^4.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
+vue-cli-plugin-vuestic-ui@~1.0.11:
+  version "1.0.11"
+  resolved "https://registry.npmmirror.com/vue-cli-plugin-vuestic-ui/-/vue-cli-plugin-vuestic-ui-1.0.11.tgz#a309977cc3656bbfe920af70bf4a903d330fa075"
+  integrity sha512-rgyYzqm5v1cu40dctBV+5lYA0NajQuMSJinhdEu5cAy+/sSb9kF6s75fDJkeNCGh3xoU5YNquAUgd3JVxl59qQ==
+
 vue-functional-data-merge@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/vue-functional-data-merge/-/vue-functional-data-merge-3.1.0.tgz#08a7797583b7f35680587f8a1d51d729aa1dc657"
@@ -631,9 +685,9 @@ vue-router@^4.1.6:
   dependencies:
     "@vue/devtools-api" "^6.4.5"
 
-vue@^3.2.45:
+vue@^3.0.0, vue@^3.2.45:
   version "3.2.45"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.45.tgz#94a116784447eb7dbd892167784619fef379b3c8"
+  resolved "https://registry.npmmirror.com/vue/-/vue-3.2.45.tgz#94a116784447eb7dbd892167784619fef379b3c8"
   integrity sha512-9Nx/Mg2b2xWlXykmCwiTUCWHbWIj53bnkizBxKai1g61f2Xit700A1ljowpTIM11e3uipOeiPcSqnmBg6gyiaA==
   dependencies:
     "@vue/compiler-dom" "3.2.45"
@@ -641,6 +695,16 @@ vue@^3.2.45:
     "@vue/runtime-dom" "3.2.45"
     "@vue/server-renderer" "3.2.45"
     "@vue/shared" "3.2.45"
+
+vuestic-ui@^1.5.0:
+  version "1.5.3"
+  resolved "https://registry.npmmirror.com/vuestic-ui/-/vuestic-ui-1.5.3.tgz#3190d7c92c8034f189e182c257d8f02ac4f56f57"
+  integrity sha512-p/OwbqMxQ6I67DjV5Ahl6u5/8/uHgAxWVFhc6xxo6+o9EEogXX5GfMtfDjK002X+cuXQUJKeDC5WGXu+Ugkkag==
+  dependencies:
+    "@types/lodash" "^4.14.161"
+    cleave.js "^1.6.0"
+    colortranslator "^1.9.2"
+    lodash "^4.17.21"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
