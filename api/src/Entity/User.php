@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\RequestPasswordController;
 use App\Controller\ValidateAccountController;
 use App\Repository\UserRepository;
 use App\State\UserAccountCreate;
@@ -40,6 +41,16 @@ use Symfony\Component\Validator\Constraints as Assert;
     ]],
     read: false,
     name: 'validate'
+)]
+#[Get(
+    uriTemplate: '/user/request_password',
+    defaults: ['identifiedBy' => 'mail'],
+    controller: RequestPasswordController::class,
+    openapiContext: ['parameters' => [
+        ['name' => 'mail', 'in' => 'query', 'required' => true]
+    ]],
+    read: false,
+    name: 'request_password'
 )]
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
