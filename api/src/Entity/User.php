@@ -5,9 +5,11 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Controller\RequestPasswordController;
+use App\Controller\UpdateUserController;
 use App\Controller\ValidateAccountController;
 use App\Repository\UserRepository;
 use App\State\UserAccountCreate;
@@ -24,9 +26,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
-)]
-#[Get(
-    security: 'is_granted("IS_AUTHENTICATED_FULLY") and object === user'
 )]
 #[GetCollection]
 #[Post(
@@ -51,6 +50,13 @@ use Symfony\Component\Validator\Constraints as Assert;
     ]],
     read: false,
     name: 'request_password'
+)]
+#[Get(
+    security: 'is_granted("IS_AUTHENTICATED_FULLY") and object === user'
+)]
+#[Patch(
+    controller: UpdateUserController::class,
+    security: 'is_granted("ROLE_ADMIN") or object === user'
 )]
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
