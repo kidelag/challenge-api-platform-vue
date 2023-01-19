@@ -1,24 +1,27 @@
 <script setup>
-import { onMounted, watch, computed, toRaw } from "vue";
-import { store, setBuyCourse, selectCourse } from "../store/store";
+import { onMounted, watchEffect, computed, ref } from "vue";
+import { store, setBuyCourse } from "../store/store";
 import router from "../router";
 import { checkConnection } from "../utils/checkConnection";
 
 const courseId = router.currentRoute.value.params.id;
-
+const courses = ref({});
 const course = computed(() => {
-  return store.courses.array[store.courses.selected];
+  return store.courses.selected ? courses.value[store.courses.selected] : {};
+});
+
+watchEffect(() => {
+  courses.value = store.courses.list;
+  console.log("here", courses.value);
 });
 
 onMounted(() => {
   checkConnection(false, "Detail");
-  selectCourse(courseId);
+  store.selectCourse(courseId);
 });
 
 const handleBuy = () => {
   setBuyCourse(courseId);
-  store.selectCourse(null);
-  selectCourse(courseId);
 };
 </script>
 
@@ -27,6 +30,7 @@ const handleBuy = () => {
     <h1>{{ course?.title }}</h1>
 
     <div class="description">{{ course?.description }}</div>
+    <div class="content">{{ course?.content }}</div>
 
     <button
       class="btn btn-primary"

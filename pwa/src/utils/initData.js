@@ -13,6 +13,7 @@ const getItems = () => {
             id: item.id,
             title: item.title,
             description: item.description,
+            content: item.content,
             possessed: false,
             pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
           };
@@ -29,9 +30,6 @@ const getItems = () => {
 
 export const initData = async () => {
   const courses = await getItems();
-  console.log("debug", courses);
 
   listCourses.value = courses;
-
-  console.log("debug", store.courses.list);
 };

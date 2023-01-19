@@ -34,8 +34,8 @@ export const store = reactive({
     this.user.firstname = user.firstname;
     this.user.lastname = user.lastname;
   },
-  selectCourse(index) {
-    this.courses.selected = index;
+  selectCourse(id) {
+    this.courses.selected = id;
   },
 
   getCourses() {
@@ -51,13 +51,6 @@ export const store = reactive({
     this.user.lastname = "";
   },
 });
-
-export const selectCourse = (id) => {
-  const courses = toRaw(store.courses.list);
-  const courseIndex = courses.findIndex((course) => course.id === parseInt(id));
-
-  store.selectCourse(courseIndex);
-};
 
 export const setBuyCourse = (id) => {
   const courses = toRaw(store.courses.list);

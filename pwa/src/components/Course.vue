@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, watch, computed, toRaw } from "vue";
-import { store, setBuyCourse, selectCourse } from "../store/store";
+import { store, setBuyCourse } from "../store/store";
 import router from "../router";
 import { checkConnection } from "../utils/checkConnection";
 
@@ -12,7 +12,7 @@ const course = computed(() => {
 
 onMounted(() => {
   checkConnection(false, "Detail");
-  selectCourse(courseId);
+  store.selectCourse(courseId);
 
   if (!course.value.possessed) router.push(`/detail/${courseId}`);
 });
