@@ -2,7 +2,11 @@ import axios from "axios";
 import router from "../router";
 import { store } from "../store/store";
 
-export const checkConnection = (withRedirectOnConnect, from) => {
+export const checkConnection = (
+  withRedirectOnConnect,
+  withRedirectOnCatch,
+  from
+) => {
   // console.log("debug here", from);
   if (!store.user.isConnected) {
     const tokenRaw = localStorage.getItem("TOKEN");
@@ -20,13 +24,15 @@ export const checkConnection = (withRedirectOnConnect, from) => {
           store.setConnected(true);
           store.setValid(data.valid);
           store.setUser(data);
+          console.log("debug here", from, withRedirectOnConnect);
+
           if (withRedirectOnConnect) router.push("/");
         })
         .catch(() => {
-          if (withRedirectOnConnect) router.push("/");
+          if (withRedirectOnCatch) router.push("/");
         });
     } else {
-      if (withRedirectOnConnect) router.push("/");
+      if (withRedirectOnCatch) router.push("/");
     }
   }
 };

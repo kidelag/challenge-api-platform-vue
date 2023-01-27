@@ -65,7 +65,7 @@ let errorShown = ref(false);
 let errorMessage = ref("");
 
 onMounted(() => {
-  checkConnection(false, "login");
+  checkConnection(false, false, "login");
 });
 
 const handleSubmit = () => {

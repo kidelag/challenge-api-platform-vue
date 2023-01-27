@@ -13,14 +13,13 @@ const course = computed(() => {
 
 watchEffect(() => {
   courses.value = store.courses.list;
-  console.log(course.value);
 });
 
 onMounted(() => {
-  checkConnection(false, "Detail");
+  checkConnection(false, true, "Detail");
   store.selectCourse(courseId);
 
-  if (typeof course.value.possessed === "boolean" && !course.value.possessed)
+  if (typeof course.value?.possessed === "boolean" && !course.value?.possessed)
     router.push(`/detail/${courseId}`);
 });
 </script>

@@ -47,12 +47,12 @@ const toggleMenu = () => {
 };
 
 onMounted(() => {
-  checkConnection(true, "dashboard");
+  checkConnection(false, true, "dashboard");
 });
 </script>
 
 <template>
-  <div style="height: 90vh">
+  <div style="height: 90vh" class="wrapper">
     <va-sidebar :minimized="minimized" minimizedWidth="64px">
       <va-icon
         class="m-3"
@@ -76,6 +76,16 @@ onMounted(() => {
       </va-sidebar-item>
     </va-sidebar>
 
-    <component v-bind:is="currentPage"></component>
+    <Suspense>
+      <component v-bind:is="currentPage"></component>
+    </Suspense>
   </div>
 </template>
+
+<style scoped>
+.wrapper {
+  display: flex;
+
+  max-width: 100vw;
+}
+</style>

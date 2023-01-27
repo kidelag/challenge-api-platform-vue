@@ -15,7 +15,7 @@ watchEffect(() => {
 });
 
 onMounted(() => {
-  checkConnection(false, "Detail");
+  checkConnection(false, false, "Detail");
   store.selectCourse(courseId);
 });
 
