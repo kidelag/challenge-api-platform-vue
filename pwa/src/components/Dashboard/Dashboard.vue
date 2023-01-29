@@ -20,11 +20,12 @@ const tabsAdmin = isAdmin
         name: "Gestion User",
         component: Gestion,
       },
+      { icon: "donut_small", name: "Avancement", component: Avancement },
     ]
   : [];
 const tabsTeacher = isTeacher
   ? [{ icon: "menu_book", name: "Vos cours", component: Cours }]
-  : [{ icon: "donut_small", name: "Avancement", component: Avancement }];
+  : [];
 
 const userTabs = [{ icon: "face", name: "Profil", component: Profil }];
 

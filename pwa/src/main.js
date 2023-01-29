@@ -11,9 +11,13 @@ import "vuestic-ui/styles/typography.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap";
 
+import vue3StarRatings from "vue3-star-ratings";
+
 const app = createApp(App);
 
 app.use(router);
 
 app.use(createVuestic());
+app.component("vue3-star-ratings", vue3StarRatings);
+
 app.mount("#app");

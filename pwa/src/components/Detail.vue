@@ -1,11 +1,23 @@
 <script setup>
-import { onMounted, watchEffect, computed, ref } from "vue";
+import { onMounted, watchEffect, watch, computed, ref } from "vue";
 import { store, setBuyCourse } from "../store/store";
 import router from "../router";
 import { checkConnection } from "../utils/checkConnection";
 
+const { user } = store;
+
 const courseId = router.currentRoute.value.params.id;
 const courses = ref({});
+const rating = ref(2.5);
+const comment = ref("");
+const commenting = ref(false);
+
+const commentsList = ref([
+  { Note: 2, Commentaire: "Franchement pas ouf", Prénom: "Prénom", Nom: "Nom" },
+  { Note: 2, Commentaire: "Franchement pas ouf", Prénom: "Prénom", Nom: "Nom" },
+  { Note: 2, Commentaire: "Franchement pas ouf", Prénom: "Prénom", Nom: "Nom" },
+]);
+
 const course = computed(() => {
   return store.courses.selected ? courses.value[store.courses.selected] : {};
 });
@@ -22,6 +34,40 @@ onMounted(() => {
 const handleBuy = () => {
   setBuyCourse(courseId);
 };
+
+const handleComment = () => {
+  commenting.value = !commenting.value;
+};
+
+const closeCommenting = () => {
+  rating.value = 2.5;
+  comment.value = "";
+  commenting.value = false;
+};
+
+const submitComment = () => {
+  const body = {
+    courseId: courseId,
+    userId: user.id,
+    star: rating.value,
+    content: comment.value,
+  };
+
+  commentsList.value.push({
+    Note: rating.value,
+    Commentaire: comment.value,
+    Prénom: user.firstname,
+    Nom: user.lastname,
+  });
+
+  closeCommenting();
+
+  console.log("debug", body);
+};
+
+watch(rating, () => {
+  console.log("debug", rating.value);
+});
 </script>
 
 <template>
@@ -47,12 +93,39 @@ const handleBuy = () => {
       class="btn btn-outline-primary"
       >Reprendre ce cours</router-link
     >
+    <div class="wrapperCommentsList">
+      <va-data-table :items="commentsList" />
+    </div>
     <button
       v-if="!course?.possessed && store.user.isConnected"
       class="btn btn-primary"
       @click="handleBuy"
     >
       Acheter ce cours
+    </button>
+    <div class="wrapperComment" v-if="commenting">
+      <vue3-star-ratings v-model="rating" />
+      <textarea
+        v-model="comment"
+        placeholder="Rentrez votre commentaire ici"
+      ></textarea>
+      <button class="btn btn-primary" @click="submitComment">
+        Valider le commentaire
+      </button>
+    </div>
+    <button
+      class="btn btn-primary"
+      v-else-if="course?.possessed && store.user.isConnected"
+      @click="handleComment"
+    >
+      Laisser un commentaire
+    </button>
+    <button
+      class="btn btn-primary-outline"
+      v-if="course?.possessed && store.user.isConnected && commenting"
+      @click="closeCommenting"
+    >
+      Annuler
     </button>
   </div>
 </template>
@@ -61,5 +134,15 @@ const handleBuy = () => {
 .wrapper {
   padding: 3vh 3vw;
   text-align: center;
+}
+
+.wrapperCommentsList {
+  margin: 3vh 0;
+}
+
+.wrapperComment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

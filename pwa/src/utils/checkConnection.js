@@ -24,7 +24,7 @@ export const checkConnection = (
           store.setConnected(true);
           store.setValid(data.valid);
           store.setUser(data);
-          console.log("debug here", from, withRedirectOnConnect);
+          console.log("debug here", data);
 
           if (withRedirectOnConnect) router.push("/");
         })

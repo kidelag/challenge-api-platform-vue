@@ -12,6 +12,7 @@ const initStore = {
     lastname: "",
     isAdmin: true,
     isTeacher: true,
+    isTeacherValid: true,
   },
   courses: { list: {}, selected: null },
 };

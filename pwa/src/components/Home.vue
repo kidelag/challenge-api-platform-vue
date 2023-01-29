@@ -35,6 +35,12 @@ watchEffect(() => {
             class="btn btn-outline-primary"
             >Reprendre ce cours</router-link
           >
+          <router-link
+            v-if="item.possessed"
+            :to="`/detail/${item.id}`"
+            class="btn btn-primary"
+            >Détail du cours</router-link
+          >
           <router-link v-else :to="`/detail/${item.id}`" class="btn btn-primary"
             >Suivre ce cours</router-link
           >
