@@ -3,13 +3,19 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\UserCourseRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserCourseRepository::class)]
 #[ApiResource]
+#[GetCollection(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+#[Get(
+    security: 'is_granted("IS_AUTHENTICATED_FULLY") and object === user'
+)]
 class UserCourse
 {
     #[ORM\Id]
@@ -17,67 +23,39 @@ class UserCourse
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'userCourses')]
-    private Collection $user_id;
+    #[ORM\ManyToOne(inversedBy: 'userCourses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $account = null;
 
-    #[ORM\ManyToMany(targetEntity: Course::class, inversedBy: 'userCourses')]
-    private Collection $course;
-
-    public function __construct()
-    {
-        $this->user_id = new ArrayCollection();
-        $this->course = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'userCourses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Course $course = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUserId(): Collection
+    public function getAccount(): ?User
     {
-        return $this->user_id;
+        return $this->account;
     }
 
-    public function addUserId(User $userId): self
+    public function setAccount(?User $account): self
     {
-        if (!$this->user_id->contains($userId)) {
-            $this->user_id->add($userId);
-        }
+        $this->account = $account;
 
         return $this;
     }
 
-    public function removeUserId(User $userId): self
-    {
-        $this->user_id->removeElement($userId);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Course>
-     */
-    public function getCourse(): Collection
+    public function getCourse(): ?Course
     {
         return $this->course;
     }
 
-    public function addCourse(Course $course): self
+    public function setCourse(?Course $course): self
     {
-        if (!$this->course->contains($course)) {
-            $this->course->add($course);
-        }
-
-        return $this;
-    }
-
-    public function removeCourse(Course $course): self
-    {
-        $this->course->removeElement($course);
+        $this->course = $course;
 
         return $this;
     }

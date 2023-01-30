@@ -46,7 +46,7 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Question::class, orphanRemoval: true)]
     private Collection $questions;
 
-    #[ORM\ManyToMany(targetEntity: UserCourse::class, mappedBy: 'course')]
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: UserCourse::class, orphanRemoval: true)]
     private Collection $userCourses;
 
     public function __construct()
@@ -217,7 +217,7 @@ class Course
     {
         if (!$this->userCourses->contains($userCourse)) {
             $this->userCourses->add($userCourse);
-            $userCourse->addCourse($this);
+            $userCourse->setCourse($this);
         }
 
         return $this;
@@ -226,7 +226,10 @@ class Course
     public function removeUserCourse(UserCourse $userCourse): self
     {
         if ($this->userCourses->removeElement($userCourse)) {
-            $userCourse->removeCourse($this);
+            // set the owning side to null (unless already changed)
+            if ($userCourse->getCourse() === $this) {
+                $userCourse->setCourse(null);
+            }
         }
 
         return $this;

@@ -112,6 +112,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $token = null;
 
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: UserCourse::class, orphanRemoval: true)]
+    private Collection $userCourses;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
@@ -269,6 +272,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setToken(?string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCourse>
+     */
+    public function getUserCourses(): Collection
+    {
+        return $this->userCourses;
+    }
+
+    public function addUserCourse(UserCourse $userCourse): self
+    {
+        if (!$this->userCourses->contains($userCourse)) {
+            $this->userCourses->add($userCourse);
+            $userCourse->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserCourse(UserCourse $userCourse): self
+    {
+        if ($this->userCourses->removeElement($userCourse)) {
+            // set the owning side to null (unless already changed)
+            if ($userCourse->getAccount() === $this) {
+                $userCourse->setAccount(null);
+            }
+        }
 
         return $this;
     }
