@@ -54,7 +54,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[Get(
     security: 'is_granted("IS_AUTHENTICATED_FULLY") and object === user'
 )]
-#[Patch(
+#[Put(
     controller: UpdateUserController::class,
     security: 'is_granted("ROLE_ADMIN") or object === user'
 )]
@@ -64,6 +64,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    #[Groups(['read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

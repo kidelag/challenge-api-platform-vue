@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Controller\PaymentCourseController;
 use App\Repository\CourseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 #[ApiResource]
+#[Get(
+    uriTemplate: '/course/buy/{id}',
+    controller: PaymentCourseController::class,
+    name: 'buy'
+)]
 class Course
 {
     #[ORM\Id]
