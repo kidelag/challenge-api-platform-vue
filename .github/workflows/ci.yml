@@ -46,7 +46,7 @@ jobs:
         run: docker compose exec -T php bin/phpunit
   docker:
     runs-on: ubuntu-latest
-    env:
+    env: 
         working-directory: ./api
     steps:
       - name: Set up QEMU
