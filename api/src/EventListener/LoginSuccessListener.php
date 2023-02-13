@@ -24,7 +24,7 @@ class LoginSuccessListener
         // Add information to user payload
         $payload += [
             'user_id' => $user->getId(),
-            'email' => $user->getMail(),
+            'mail' => $user->getMail(),
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
             'valid' => $user->isValid()
