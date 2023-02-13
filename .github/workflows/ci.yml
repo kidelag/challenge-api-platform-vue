@@ -21,4 +21,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: | 
             cd /var/www/html/
-            ls
+            git clone git@github.com:kidelag/challenge-api-platform-vue.git
+            cd challenge-api-platform-vue
+            npm install
+            composer install
