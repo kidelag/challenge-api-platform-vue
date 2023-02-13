@@ -3,12 +3,37 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ApiResource]
+
+#[GetCollection]
+
+#[Put(
+    security: 'is_granted("ROLE_ADMIN") or object.user_id === user'
+)]
+
+#[Patch(
+    security: 'is_granted("ROLE_ADMIN") or object.user_id === user'
+)]
+
+
+#[Post(
+    security: 'is_granted("IS_AUTHENTICATED_FULLY")'
+)]
+
+#[Delete(
+    security: 'is_granted("ROLE_ADMIN") or object.user_id === user'
+)]
+
 class Comment
 {
     #[ORM\Id]
@@ -18,7 +43,7 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    public ?User $user_id = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
