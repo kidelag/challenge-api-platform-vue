@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource]
 #[GetCollection]
 #[Post(
-    security: 'is_granted("ROLE_USER") or is_granted("ROLE_ADMIN")  or is_granted("IS_AUTHENTICATED_FULLY")'
+    security: 'is_granted("ROLE_FORMER") or is_granted("ROLE_ADMIN") or is_granted("IS_AUTHENTICATED_FULLY")'
 )]
 
 #[Put(
