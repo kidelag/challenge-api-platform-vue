@@ -33,9 +33,9 @@ final class JwtDecorator implements OpenApiFactoryInterface
         $schemas['Credentials'] = new \ArrayObject([
             'type' => 'object',
             'properties' => [
-                'username' => [
+                'mail' => [
                     'type' => 'string',
-                    'example' => 'username',
+                    'example' => 'john.doe@gmail.com',
                 ],
                 'password' => [
                     'type' => 'string',

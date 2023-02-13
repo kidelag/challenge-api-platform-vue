@@ -1,11 +1,23 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-import './assets/main.css'
+import { createVuestic } from "vuestic-ui";
+import "vuestic-ui/styles/essential.css";
+import "vuestic-ui/styles/grid.css";
+// import "vuestic-ui/styles/reset.css";
+import "vuestic-ui/styles/typography.css";
 
-const app = createApp(App)
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap";
 
-app.use(router)
+import vue3StarRatings from "vue3-star-ratings";
 
-app.mount('#app')
+const app = createApp(App);
+
+app.use(router);
+
+app.use(createVuestic());
+app.component("vue3-star-ratings", vue3StarRatings);
+
+app.mount("#app");
