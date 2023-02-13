@@ -23,7 +23,7 @@ jobs:
             cd /var/www/html/
             if [ ! -d challenge-api-platform-vue ]; then
               git clone git@github.com:kidelag/challenge-api-platform-vue.git
-              cd challenge-api-platform-vue
+              cd challenge-api-platform-vue/api
               echo "APP_ENV=prod" > .env
               echo "APP_SECRET=SECRET_KEY" >> .env
               echo "DATABASE_URL='mysql://root:Mlambr753@127.0.0.1:3306/challenge?serverVersion=8&charset=utf8mb4'" >> .env
