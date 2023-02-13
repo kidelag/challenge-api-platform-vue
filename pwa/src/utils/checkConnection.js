@@ -21,6 +21,25 @@ export const checkConnection = (
           },
         })
         .then(({ data }) => {
+          axios
+            .get(import.meta.env.VITE_API_URL + "/formers")
+            .then(({ data: { ["hydra:member"]: formerRaw } }) => {
+              const formers = formerRaw.map((item) => ({
+                userId: parseInt(
+                  item.userId.split("/")[item.userId.split("/").length - 1]
+                ),
+                isValid: item.valid,
+              }));
+
+              if (formers.some((item) => item.userId === parseInt(data.id))) {
+                const former = formers.filter(
+                  (item) => item.userId === parseInt(data.id)
+                );
+
+                store.setProf(true, former[0].isValid);
+              }
+            });
+
           store.setToken(token);
 
           store.setConnected(true);

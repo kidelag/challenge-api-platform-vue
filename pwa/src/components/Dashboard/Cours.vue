@@ -18,7 +18,11 @@ const createEditor = ref(null);
 
 const {
   data: { ["hydra:member"]: coursesRaw },
-} = await axios.get(import.meta.env.VITE_API_URL + "/courses");
+} = await axios.get(import.meta.env.VITE_API_URL + "/courses", {
+  headers: {
+    Authorization: `Bearer ${store.user.token}`,
+  },
+});
 
 const courses = ref([]);
 
@@ -113,7 +117,12 @@ const editCourse = () => {
       import.meta.env.VITE_API_URL +
         "/courses/" +
         courses.value[editedCourseId.value].id,
-      { title: body.Titre, content: myEditor.value.getHTML() }
+      { title: body.Titre, content: myEditor.value.getHTML() },
+      {
+        headers: {
+          Authorization: `Bearer ${store.user.token}`,
+        },
+      }
     )
     .then(() => {
       editedCourse.value = null;
@@ -131,9 +140,17 @@ const resetEditedCourse = () => {
 
 const reviewCourse = (isValid, id, rowIndex) => {
   axios
-    .put(import.meta.env.VITE_API_URL + "/courses/" + id, {
-      valid: isValid,
-    })
+    .put(
+      import.meta.env.VITE_API_URL + "/courses/" + id,
+      {
+        valid: isValid,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${store.user.token}`,
+        },
+      }
+    )
     .then(() => {
       courses.value[rowIndex] = {
         ...courses.value[rowIndex],
@@ -156,7 +173,11 @@ const handleCreate = () => {
   };
 
   axios
-    .post(import.meta.env.VITE_API_URL + "/courses", body)
+    .post(import.meta.env.VITE_API_URL + "/courses", body, {
+      headers: {
+        Authorization: `Bearer ${store.user.token}`,
+      },
+    })
     .then(() => {
       courses.value.push({
         Titre: createCourse.value.title,
