@@ -5,9 +5,20 @@ import { ref, isReactive, watchEffect } from "vue";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 const items = ref({});
+const validItems = ref({});
 
 watchEffect(() => {
   items.value = store.courses.list;
+  console.log(items.value);
+
+  for (const item in items.value) {
+    if (items.value[item].valid) {
+      validItems.value = {
+        ...validItems.value,
+        [item]: { ...items.value[item] },
+      };
+    }
+  }
 });
 
 let content;
@@ -19,7 +30,7 @@ let content;
 
     <div class="wrapperItems">
       <div
-        v-for="item in items"
+        v-for="item in validItems"
         :key="item.id"
         class="card mt-3"
         style="width: 18rem"

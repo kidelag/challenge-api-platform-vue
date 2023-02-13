@@ -32,6 +32,7 @@ const getItems = () => {
                 description: item.description,
                 content: item.content,
                 possessed: possessed,
+                valid: item.valid,
               };
             });
 
