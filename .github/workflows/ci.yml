@@ -21,8 +21,21 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: | 
             cd /var/www/html/
-            git clone git@github.com:kidelag/challenge-api-platform-vue.git
-            cd challenge-api-platform-vue/api
+            if [ ! -d challenge-api-platform-vue ]; then
+              git clone git@github.com:kidelag/challenge-api-platform-vue.git
+              cd challenge-api-platform-vue
+              echo "APP_ENV=prod" > .env
+              echo "APP_SECRET=SECRET_KEY" >> .env
+              echo "DATABASE_URL='mysql://root:Mlambr753@127.0.0.1:3306/challenge?serverVersion=8&charset=utf8mb4'" >> .env
+              echo "CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'" >> .env
+              echo "JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem" >> .env
+              echo "JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem" >> .env
+              echo "JWT_PASSPHRASE=0aedc7c1c0b7a5a0010c28b7d85f8ea2" >> .env
+              bin/console d:s:u --force
+            fi
+            cd challenge-api-platform-vue
+            git pull
+            cd api
             composer install
             cd ..
             cd pwa
