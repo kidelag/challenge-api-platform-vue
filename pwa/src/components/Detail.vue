@@ -73,24 +73,24 @@ const submitComment = () => {
     content: comment.value,
   };
 
-  axios
-    .post(import.meta.env.VITE_API_URL + "/comments", body, {
-      headers: {
-        Authorization: `Bearer ${store.user.token}`,
-      },
-    })
-    .then(() => {
-      commentsList.value.push({
-        Note: rating.value,
-        Commentaire: comment.value,
-        Prénom: user.firstname,
-        Nom: user.lastname,
-      });
-      closeCommenting();
-    })
-    .catch((err) => {
-      console.log("dbeug", err);
-    });
+  // axios
+  //   .post(import.meta.env.VITE_API_URL + "/comments", body, {
+  //     headers: {
+  //       Authorization: `Bearer ${store.user.token}`,
+  //     },
+  //   })
+  //   .then(() => {
+  commentsList.value.push({
+    Note: rating.value,
+    Commentaire: comment.value,
+    Prénom: user.firstname,
+    Nom: user.lastname,
+  });
+  closeCommenting();
+  // })
+  // .catch((err) => {
+  //   console.log("dbeug", err);
+  // });
 };
 
 watch(rating, () => {
