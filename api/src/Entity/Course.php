@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
@@ -18,10 +19,24 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 #[ApiResource]
 #[GetCollection]
-#[Post]
-#[Put]
-#[Patch]
+#[Post(
+    security: 'is_granted("ROLE_USER") or is_granted("ROLE_ADMIN")  or is_granted("IS_AUTHENTICATED_FULLY")'
+)]
+
+#[Put(
+    security: 'is_granted("ROLE_ADMIN") or object.user_id === user'
+)]
+
+#[Patch(
+    security: 'is_granted("ROLE_ADMIN") or object.user_id === user'
+)]
+
 #[Get]
+
+#[Delete(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
 #[Get(
     uriTemplate: '/course/buy/{id}',
     controller: PaymentCourseController::class,
@@ -54,7 +69,7 @@ class Course
 
     #[ORM\ManyToOne(inversedBy: 'courses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    public ?User $user_id = null;
 
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;

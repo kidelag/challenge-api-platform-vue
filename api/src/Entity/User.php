@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
@@ -27,7 +28,9 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
 )]
-#[GetCollection]
+#[GetCollection(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
 #[Post(
     processor: UserAccountCreate::class
 )]
@@ -56,6 +59,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 )]
 #[Put(
     controller: UpdateUserController::class,
+    security: 'is_granted("ROLE_ADMIN") or object === user'
+)]
+#[Delete(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
+#[Patch(
     security: 'is_granted("ROLE_ADMIN") or object === user'
 )]
 
