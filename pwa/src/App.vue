@@ -46,6 +46,20 @@ initData();
           </li>
         </ul>
         <div class="d-flex">
+          <div class="wrapperRole" v-if="store.user.isConnected">
+            <va-badge
+              class="m-9"
+              text="Admin"
+              color="success"
+              v-if="store.user.isAdmin"
+            />
+            <va-badge
+              class="m-9"
+              text="Professeur"
+              color="success"
+              v-if="store.user.isTeacher && store.user.isTeacherValid"
+            />
+          </div>
           <button
             class="btn btn-primary"
             v-if="!store.user.isConnected"

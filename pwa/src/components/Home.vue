@@ -2,12 +2,15 @@
 import router from "../router";
 import { store } from "../store/store";
 import { ref, isReactive, watchEffect } from "vue";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 const items = ref({});
 
 watchEffect(() => {
   items.value = store.courses.list;
 });
+
+let content;
 </script>
 
 <template>

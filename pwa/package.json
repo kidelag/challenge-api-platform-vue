@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vuestic/ag-grid-theme": "^1.0.3",
+    "@vueup/vue-quill": "^1.1.0",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",

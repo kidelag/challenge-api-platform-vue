@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
     security: 'is_granted("ROLE_ADMIN")'
 )]
 #[Get(
-    security: 'is_granted("IS_AUTHENTICATED_FULLY") and object.account === user'
+    // security: 'is_granted("IS_AUTHENTICATED_FULLY") and object.account === user'
 )]
 class UserCourse
 {
