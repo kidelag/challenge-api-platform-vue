@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
     security: 'is_granted("ROLE_ADMIN")'
 )]
 #[Get(
-    security: 'is_granted("IS_AUTHENTICATED_FULLY") and object === user'
+    // security: 'is_granted("IS_AUTHENTICATED_FULLY") and object.account === user'
 )]
 class UserCourse
 {
@@ -25,7 +25,7 @@ class UserCourse
 
     #[ORM\ManyToOne(inversedBy: 'userCourses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $account = null;
+    public ?User $account = null;
 
     #[ORM\ManyToOne(inversedBy: 'userCourses')]
     #[ORM\JoinColumn(nullable: false)]

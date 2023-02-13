@@ -21,10 +21,17 @@ export const checkConnection = (
           },
         })
         .then(({ data }) => {
+          store.setToken(token);
+
           store.setConnected(true);
           store.setValid(data.valid);
-          store.setUser(data);
-          console.log("debug here", data);
+
+          store.setUser({
+            ...data,
+            user_id: data.id,
+            isAdmin: data.roles.includes("ROLE_ADMIN"),
+          });
+          // console.log("debug here", data);
 
           if (withRedirectOnConnect) router.push("/");
         })

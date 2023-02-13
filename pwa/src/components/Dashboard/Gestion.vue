@@ -59,7 +59,12 @@ const input = "";
   <div class="wrapperPage">
     <h1>Gestion des Utilisateurs</h1>
     <div class="wrapperUsers">
-      <va-data-table :items="users" :columns="columns"
+      <va-data-table
+        :items="users"
+        :columns="columns"
+        :wrapper-size="500"
+        :item-size="46"
+        virtual-scroller
         ><template #cell(actions)="{ rowIndex }">
           <va-button
             preset="plain"
