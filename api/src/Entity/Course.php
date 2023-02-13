@@ -44,10 +44,10 @@ class Course
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    private string|null|\DateTimeInterface $createdAt = 'NOW';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $updated_at = null;
+    private string|null|\DateTimeInterface $updated_at = 'NOW';
 
     #[ORM\Column]
     private ?bool $valid = null;

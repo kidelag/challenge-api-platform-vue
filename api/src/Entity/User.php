@@ -32,6 +32,9 @@ use Symfony\Component\Validator\Constraints as Assert;
     processor: UserAccountCreate::class
 )]
 #[Get(
+    security: '(is_granted("IS_AUTHENTICATED_FULLY") and object === user) or (is_granted("ROLE_ADMIN"))'
+)]
+#[Get(
     uriTemplate: '/user/validate',
     defaults: ['identifiedBy' => 'token'],
     controller: ValidateAccountController::class,
@@ -50,9 +53,6 @@ use Symfony\Component\Validator\Constraints as Assert;
     ]],
     read: false,
     name: 'request_password'
-)]
-#[Get(
-    security: 'is_granted("IS_AUTHENTICATED_FULLY") and object === user'
 )]
 #[Put(
     controller: UpdateUserController::class,
@@ -96,11 +96,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    private string|null|\DateTimeInterface $createdAt = 'NOW';
 
     #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $updatedAt = null;
+    private string|null|\DateTimeInterface $updatedAt = 'NOW';
 
     #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -113,6 +113,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $token = null;
 
+    #[Groups(['read'])]
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: UserCourse::class, orphanRemoval: true)]
     private Collection $userCourses;
 
