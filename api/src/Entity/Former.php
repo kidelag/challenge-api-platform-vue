@@ -53,7 +53,7 @@ class Former
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'former', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'former')]
     #[ORM\JoinColumn(nullable: false)]
     public ?User $user_id = null;
 
