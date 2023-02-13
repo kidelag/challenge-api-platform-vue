@@ -84,7 +84,7 @@ watch(rating, () => {
       data-bs-toggle="modal"
       data-bs-target="#ModalConnection"
     >
-      Connection
+      Connexion
     </button>
 
     <router-link

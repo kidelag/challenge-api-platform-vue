@@ -52,15 +52,15 @@ initData();
             data-bs-toggle="modal"
             data-bs-target="#ModalConnection"
           >
-            Connection
+            Connexion
           </button>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-warning"
             v-if="store.user.isConnected"
             @click="handleLogout"
           >
-            Logout
+            Déconnexion
           </button>
         </div>
       </div>
