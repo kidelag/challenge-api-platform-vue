@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/mep
+      - feature/mep 
   pull_request: ~
   workflow_dispatch: ~
 
