@@ -3,11 +3,43 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnswerRepository::class)]
 #[ApiResource]
+
+#[GetCollection(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
+#[Get(
+    security: 'is_granted("ROLE_ADMIN") or object.question.course.user_id === user or is_granted("ROLE_FORMER")'
+
+)]
+
+#[Post(
+    security: 'is_granted("ROLE_ADMIN") or is_granted("ROLE_FORMER")'
+)]
+
+#[Put(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
+#[Patch(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
+#[Delete(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
 class Answer
 {
     #[ORM\Id]
@@ -23,7 +55,7 @@ class Answer
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Question $question = null;
+    public ?Question $question = null;
 
     public function getId(): ?int
     {

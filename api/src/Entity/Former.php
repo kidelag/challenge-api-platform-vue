@@ -3,12 +3,49 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\FormerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FormerRepository::class)]
 #[ApiResource]
+
+#[GetCollection(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
+#[Get(
+    security: 'object.user_id === user or is_granted("ROLE_ADMIN")'
+)]
+
+
+#[Post(
+    security: 'is_granted("IS_AUTHENTICATED_FULLY") or is_granted("ROLE_ADMIN")'
+)]
+
+
+#[Delete(
+    security: 'is_granted("ROLE_ADMIN")'
+)]
+
+
+#[Put(
+    security: 'object.user_id === user or is_granted("ROLE_ADMIN")'
+)]
+
+
+#[Patch(
+    security: 'object.user_id === user or is_granted("ROLE_ADMIN")'
+)]
+
+
+
 class Former
 {
     #[ORM\Id]
@@ -18,7 +55,7 @@ class Former
 
     #[ORM\OneToOne(inversedBy: 'former', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    public ?User $user_id = null;
 
     #[ORM\Column]
     private ?bool $valid = null;
