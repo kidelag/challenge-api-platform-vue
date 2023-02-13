@@ -10,6 +10,7 @@ const {
     isConnected,
     isTeacher,
     isTeacherValid,
+    token,
     ...infos
   },
 } = store;

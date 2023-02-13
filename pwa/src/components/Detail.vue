@@ -33,7 +33,26 @@ onMounted(() => {
 });
 
 const handleBuy = () => {
-  setBuyCourse(courseId);
+  axios
+    .post(
+      import.meta.env.VITE_API_URL + "/user_courses",
+      {
+        account: "users/" + store.user.id,
+        course: "courses/" + courseId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${store.user.token}`,
+        },
+      }
+    )
+    .then(() => {
+      setBuyCourse(courseId);
+      console.log("cours acheté");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const handleComment = () => {

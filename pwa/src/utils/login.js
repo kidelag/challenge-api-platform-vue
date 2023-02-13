@@ -10,19 +10,37 @@ export const login = (mail, password) => {
         password: password,
       })
       .then(({ data }) => {
-        // Récupération du jeton de l'API
+        axios
+          .get(import.meta.env.VITE_API_URL + "/formers")
+          .then(({ data: { ["hydra:member"]: formerRaw } }) => {
+            const formers = formerRaw.map((item) => ({
+              userId: parseInt(
+                item.userId.split("/")[item.userId.split("/").length - 1]
+              ),
+              isValid: item.valid,
+            }));
 
-        const { token, ...user } = data;
-        console.log("debug", data);
+            const { token, ...user } = data;
 
-        store.setConnected(true);
-        store.setUser(user);
+            if (
+              formers.some((item) => item.userId === parseInt(user.user_id))
+            ) {
+              const former = formers.filter(
+                (item) => item.userId === parseInt(user.user_id)
+              );
 
-        // Enregistrement du jeton dans le stockage local
-        localStorage.setItem("TOKEN", `${user.user_id} ${token}`);
-        // redirection vers la page d'accueil
+              store.setProf(true, former[0].isValid);
+            }
 
-        resolve();
+            store.setConnected(true);
+            store.setUser(user);
+
+            // Enregistrement du jeton dans le stockage local
+            localStorage.setItem("TOKEN", `${user.user_id} ${token}`);
+            // redirection vers la page d'accueil
+
+            resolve();
+          });
       })
       .catch((error) => {
         // Gestion des erreurs

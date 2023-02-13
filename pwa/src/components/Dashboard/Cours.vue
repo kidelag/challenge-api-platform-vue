@@ -156,7 +156,11 @@ const handleCreate = () => {
   };
 
   axios
-    .post(import.meta.env.VITE_API_URL + "/courses", body)
+    .post(import.meta.env.VITE_API_URL + "/courses", body, {
+      headers: {
+        Authorization: `Bearer ${store.user.token}`,
+      },
+    })
     .then(() => {
       courses.value.push({
         Titre: createCourse.value.title,
