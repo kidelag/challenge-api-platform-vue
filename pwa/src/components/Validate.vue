@@ -7,7 +7,7 @@ const token = router.currentRoute.value.params.token;
 const error = ref("Nous validons votre token");
 
 axios
-  .get(process.env.API_URL + "/user/validate?token=" + token)
+  .get(import.meta.env.VITE_API_URL + "/user/validate?token=" + token)
   .then(() => {
     router.push("/?valid=true");
   })

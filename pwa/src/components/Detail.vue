@@ -56,7 +56,7 @@ const submitComment = () => {
 
   console.log("debug", body);
   axios
-    .post(process.env.API_URL + "/comments", body)
+    .post(import.meta.env.VITE_API_URL + "/comments", body)
     .then(() => {
       commentsList.value.push({
         Note: rating.value,

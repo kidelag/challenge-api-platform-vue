@@ -18,7 +18,7 @@ const createEditor = ref(null);
 
 const {
   data: { ["hydra:member"]: coursesRaw },
-} = await axios.get(process.env.API_URL + "/courses");
+} = await axios.get(import.meta.env.VITE_API_URL + "/courses");
 
 const courses = ref([]);
 
@@ -29,7 +29,7 @@ watchEffect(() => {
         course.userId.split("/")[course.userId.split("/").length - 1];
 
       axios
-        .get(process.env.API_URL + "/users/" + userId, {
+        .get(import.meta.env.VITE_API_URL + "/users/" + userId, {
           headers: {
             Authorization: `Bearer ${store.user.token}`,
           },
@@ -110,7 +110,7 @@ const editCourse = () => {
 
   axios
     .put(
-      process.env.API_URL +
+      import.meta.env.VITE_API_URL +
         "/courses/" +
         courses.value[editedCourseId.value].id,
       { title: body.Titre, content: myEditor.value.getHTML() }
@@ -131,7 +131,7 @@ const resetEditedCourse = () => {
 
 const reviewCourse = (isValid, id, rowIndex) => {
   axios
-    .put(process.env.API_URL + "/courses/" + id, {
+    .put(import.meta.env.VITE_API_URL + "/courses/" + id, {
       valid: isValid,
     })
     .then(() => {
@@ -156,7 +156,7 @@ const handleCreate = () => {
   };
 
   axios
-    .post(process.env.API_URL + "/courses", body)
+    .post(import.meta.env.VITE_API_URL + "/courses", body)
     .then(() => {
       courses.value.push({
         Titre: createCourse.value.title,

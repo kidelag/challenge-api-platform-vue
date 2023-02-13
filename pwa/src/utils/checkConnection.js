@@ -15,7 +15,7 @@ export const checkConnection = (
       const [id, token] = tokenRaw.split(" ");
 
       axios
-        .get(process.env.API_URL + "/users/" + id, {
+        .get(import.meta.env.VITE_API_URL + "/users/" + id, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

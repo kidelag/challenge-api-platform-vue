@@ -6,10 +6,10 @@ const getItems = () => {
     const list = {};
 
     axios
-      .get(process.env.API_URL + "/courses")
+      .get(import.meta.env.VITE_API_URL + "/courses")
       .then(({ data }) => {
         axios
-          .get(process.env.API_URL + "/user_courses")
+          .get(import.meta.env.VITE_API_URL + "/user_courses")
           .then(({ data: userCourses }) => {
             console.log(userCourses);
 

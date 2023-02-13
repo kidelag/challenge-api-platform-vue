@@ -7,7 +7,7 @@ const editedUser = ref(null);
 
 const {
   data: { ["hydra:member"]: usersRaw },
-} = await axios.get(process.env.API_URL + "/users");
+} = await axios.get(import.meta.env.VITE_API_URL + "/users");
 
 const users = ref(
   usersRaw.map((user) => ({

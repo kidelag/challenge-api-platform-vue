@@ -5,7 +5,7 @@ import { store } from "../store/store";
 export const login = (mail, password) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(process.env.API_URL + "/auth", {
+      .post(import.meta.env.VITE_API_URL + "/auth", {
         mail: mail,
         password: password,
       })

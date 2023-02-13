@@ -67,7 +67,7 @@ const initialValue = {
 
 const handleSubmit = () => {
   axios
-    .post(process.env.API_URL + "/users", {
+    .post(import.meta.env.VITE_API_URL + "/users", {
       password: initialValue.password,
       mail: initialValue.mail,
       firstname: initialValue.firstname,
