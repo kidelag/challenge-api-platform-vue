@@ -73,9 +73,12 @@ const submitComment = () => {
     content: comment.value,
   };
 
-  console.log("debug", body);
   axios
-    .post(import.meta.env.VITE_API_URL + "/comments", body)
+    .post(import.meta.env.VITE_API_URL + "/comments", body, {
+      headers: {
+        Authorization: `Bearer ${store.user.token}`,
+      },
+    })
     .then(() => {
       commentsList.value.push({
         Note: rating.value,
@@ -100,7 +103,6 @@ watch(rating, () => {
     <h1>{{ course?.title }}</h1>
 
     <div class="description">{{ course?.description }}</div>
-    <div class="content">{{ course?.content }}</div>
 
     <button
       class="btn btn-primary"
