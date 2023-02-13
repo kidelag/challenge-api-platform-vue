@@ -6,19 +6,25 @@ const getItems = () => {
     const list = {};
 
     axios
-      .get("https://localhost/courses")
+      .get(process.env.API_URL + "/courses")
       .then(({ data }) => {
-        data["hydra:member"].map((item) => {
-          list[item.id] = {
-            id: item.id,
-            title: item.title,
-            description: item.description,
-            content: item.content,
-            possessed: true,
-          };
-        });
+        axios
+          .get(process.env.API_URL + "/user_courses")
+          .then(({ data: userCourses }) => {
+            console.log(userCourses);
 
-        resolve(list);
+            data["hydra:member"].map((item) => {
+              list[item.id] = {
+                id: item.id,
+                title: item.title,
+                description: item.description,
+                content: item.content,
+                possessed: false,
+              };
+            });
+
+            resolve(list);
+          });
       })
       .catch((err) => {
         console.log("debug init data", err);

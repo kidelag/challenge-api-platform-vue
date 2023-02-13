@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UserCourseRepository::class)]
 #[ApiResource]
 #[GetCollection(
-    security: 'is_granted("ROLE_ADMIN")'
+    // security: 'is_granted("ROLE_ADMIN")'
 )]
 #[Get(
     // security: 'is_granted("IS_AUTHENTICATED_FULLY") and object.account === user'

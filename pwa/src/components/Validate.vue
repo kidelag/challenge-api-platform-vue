@@ -7,7 +7,7 @@ const token = router.currentRoute.value.params.token;
 const error = ref("Nous validons votre token");
 
 axios
-  .get("https://localhost/user/validate?token=" + token)
+  .get(process.env.API_URL + "/user/validate?token=" + token)
   .then(() => {
     router.push("/?valid=true");
   })
