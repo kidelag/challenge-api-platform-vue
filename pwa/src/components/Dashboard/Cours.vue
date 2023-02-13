@@ -1,34 +1,72 @@
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
+import { ref, watchEffect, onMounted } from "vue";
 import { store } from "../../store/store";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 const editedCourseId = ref(null);
 const editedCourse = ref(null);
+
+const creatingCourse = ref(false);
+const createCourse = ref({
+  title: "",
+  description: "",
+});
+
+const myEditor = ref(null);
+const createEditor = ref(null);
 
 const {
   data: { ["hydra:member"]: coursesRaw },
 } = await axios.get("https://localhost/courses");
 
-const courses = ref(
-  coursesRaw.map((course) => {
-    // TO CHANGE WITH USERID
-    // const {
-    //   data: { ["hydra:member"]: user },
-    // } = axios.get("https://localhost/users/" + 10);
-    const user = {
-      firstname: "Prénom",
-      lastname: "Nom",
-    };
+const courses = ref([]);
 
-    return {
-      Titre: course.title,
-      Author: `${user.firstname} ${user.lastname}`,
-      isValid: course.valid,
-      id: course.id,
-    };
-  })
-);
+watchEffect(() => {
+  if (store.user.isAdmin) {
+    coursesRaw.map((course) => {
+      const userId =
+        course.userId.split("/")[course.userId.split("/").length - 1];
+
+      axios
+        .get("https://localhost/users/" + userId, {
+          headers: {
+            Authorization: `Bearer ${store.user.token}`,
+          },
+        })
+        .then(({ data: user }) => {
+          courses.value.push({
+            Titre: course.title,
+            Author: `${user.firstname} ${user.lastname}`,
+            isValid: course.valid,
+            id: course.id,
+            content: course.content,
+          });
+        });
+    });
+  } else {
+    console.log("debug", store.user.firstname);
+
+    coursesRaw
+      .filter(
+        (courseItem) =>
+          parseInt(
+            courseItem.userId.split("/")[
+              courseItem.userId.split("/").length - 1
+            ]
+          ) === store.user.id
+      )
+      .map((course) => {
+        courses.value.push({
+          Titre: course.title,
+          Author: `${store.user.firstname} ${store.user.lastname}`,
+          isValid: course.valid,
+          id: course.id,
+          content: course.content,
+        });
+      });
+  }
+});
 
 const columns = [
   {
@@ -46,16 +84,42 @@ const columns = [
 ];
 
 const openModalToEditItemById = (index) => {
-  const { isValid, id, Author, ...editableField } = courses.value[index];
+  const {
+    isValid,
+    id,
+    Author,
+    content: contentCourse,
+    ...editableField
+  } = courses.value[index];
+
   editedCourse.value = { ...editableField };
   editedCourseId.value = index;
+
+  setTimeout(() => {
+    myEditor.value.setHTML(contentCourse);
+  }, 250);
 };
 
 const editCourse = () => {
-  courses.value[editedCourseId.value] = { ...editedCourse.value };
+  const body = { ...editedCourse.value, content: myEditor.value.getHTML() };
 
-  editedCourse.value = null;
-  editedCourseId.value = null;
+  courses.value[editedCourseId.value] = {
+    ...courses.value[editedCourseId.value],
+    ...body,
+  };
+
+  axios
+    .put(
+      "https://localhost/courses/" + courses.value[editedCourseId.value].id,
+      { title: body.Titre, content: myEditor.value.getHTML() }
+    )
+    .then(() => {
+      editedCourse.value = null;
+      editedCourseId.value = null;
+    })
+    .catch((err) => {
+      console.log("debug", err);
+    });
 };
 
 const resetEditedCourse = () => {
@@ -78,6 +142,41 @@ const reviewCourse = (isValid, id, rowIndex) => {
       console.log("debug", err);
     });
 };
+
+const handleCreate = () => {
+  const body = {
+    ...createCourse.value,
+    content: createEditor.value.getHTML(),
+    valid: false,
+    userId: "users/" + store.user.id,
+    createdAt: "NOW",
+    updatedAt: "NOW",
+  };
+
+  axios
+    .post("https://localhost/courses", body)
+    .then(() => {
+      courses.value.push({
+        Titre: createCourse.value.title,
+        Author: `${store.user.firstname} ${store.user.lastname}`,
+        isValid: false,
+        id: undefined,
+        content: createEditor.value.getHTML(),
+      });
+
+      resetCreate();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+const resetCreate = () => {
+  createCourse.value = {
+    title: "",
+    description: "",
+  };
+  creatingCourse.value = false;
+};
 </script>
 
 <template>
@@ -95,6 +194,32 @@ const reviewCourse = (isValid, id, rowIndex) => {
     </h1>
     <h1 v-else>Un administrateur va valider votre demande.</h1>
 
+    <va-button
+      @click="
+        () => {
+          creatingCourse = !creatingCourse;
+        }
+      "
+      >Ajouter un cours</va-button
+    >
+    <va-modal
+      class="modalCreateCourse"
+      :model-value="creatingCourse"
+      title="Create Course"
+      size="small"
+      @ok="handleCreate"
+      @cancel="resetCreate"
+    >
+      <va-input
+        v-for="key in Object.keys(createCourse)"
+        :key="key"
+        class="my-3"
+        :label="key"
+        v-model="createCourse[key]"
+      />
+      <QuillEditor ref="createEditor" theme="snow" />
+    </va-modal>
+
     <va-data-table
       :items="courses"
       :columns="columns"
@@ -103,13 +228,13 @@ const reviewCourse = (isValid, id, rowIndex) => {
       virtual-scroller
       ><template #cell(actions)="{ rowIndex }">
         <va-button
-          v-if="!courses[rowIndex].isValid"
+          v-if="!courses[rowIndex].isValid && store.user.isAdmin"
           preset="plain"
           icon="check"
           @click="reviewCourse(true, courses[rowIndex].id, rowIndex)"
         />
         <va-button
-          v-if="!courses[rowIndex].isValid"
+          v-if="!courses[rowIndex].isValid && store.user.isAdmin"
           preset="plain"
           icon="close"
           @click="reviewCourse(false, courses[rowIndex].id, rowIndex)"
@@ -137,6 +262,7 @@ const reviewCourse = (isValid, id, rowIndex) => {
         :label="key"
         v-model="editedCourse[key]"
       />
+      <QuillEditor ref="myEditor" theme="snow" />
     </va-modal>
   </div>
 </template>
@@ -149,6 +275,11 @@ const reviewCourse = (isValid, id, rowIndex) => {
 }
 
 .modalEditCourse {
+  .va-input {
+    display: block;
+  }
+}
+.modalCreateCourse {
   .va-input {
     display: block;
   }

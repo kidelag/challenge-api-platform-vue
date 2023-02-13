@@ -10,9 +10,10 @@ const initStore = {
     mail: "",
     firstname: "",
     lastname: "",
-    isAdmin: true,
+    isAdmin: false,
     isTeacher: true,
     isTeacherValid: true,
+    token: "",
   },
   courses: { list: {}, selected: null },
 };
@@ -34,6 +35,10 @@ export const store = reactive({
     this.user.mail = user.mail;
     this.user.firstname = user.firstname;
     this.user.lastname = user.lastname;
+    this.user.isAdmin = user.isAdmin;
+  },
+  setToken(token) {
+    this.user.token = token;
   },
   selectCourse(id) {
     this.courses.selected = id;

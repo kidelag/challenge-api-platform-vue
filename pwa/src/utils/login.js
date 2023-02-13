@@ -13,6 +13,7 @@ export const login = (mail, password) => {
         // Récupération du jeton de l'API
 
         const { token, ...user } = data;
+        console.log("debug", data);
 
         store.setConnected(true);
         store.setUser(user);

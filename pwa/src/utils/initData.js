@@ -15,7 +15,6 @@ const getItems = () => {
             description: item.description,
             content: item.content,
             possessed: true,
-            pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
           };
         });
 
