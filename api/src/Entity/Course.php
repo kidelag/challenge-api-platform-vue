@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[Post]
 #[Put]
 #[Patch]
+#[Get]
 #[Get(
     uriTemplate: '/course/buy/{id}',
     controller: PaymentCourseController::class,
