@@ -28,7 +28,7 @@ jobs:
               echo "APP_SECRET=SECRET_KEY" >> .env
               echo "TRUSTED_PROXIES=127.0.0.1" >> .env
               echo "TRUSTED_HOSTS=^challenge.matthieucmp.eu$" >> .env
-              echo "DATABASE_URL='mysql://root:Mlambr753@127.0.0.1:3306/challenge?serverVersion=8&charset=utf8mb4'" >> .env
+              echo "DATABASE_URL='mysql://root:Mlambr753@127.0.0.1:3306/challenge?serverVersion=5.7'" >> .env
               echo "CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'" >> .env
               echo "JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem" >> .env
               echo "JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem" >> .env
