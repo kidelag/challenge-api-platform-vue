@@ -95,6 +95,7 @@ jobs:
               echo "MAILER_DSN=${{ secrets.MAILER_DSN }}" >> .env
               composer install
               bin/console d:s:u --force
+              php bin/console lexik:jwt:generate-keypair --overwrite
               cd /var/www/html/
             fi
             cd challenge-api-platform-vue
