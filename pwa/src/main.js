@@ -11,6 +11,8 @@ import "vuestic-ui/styles/typography.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap";
 
+import { QuillEditor } from "@vueup/vue-quill";
+
 import vue3StarRatings from "vue3-star-ratings";
 
 const app = createApp(App);
@@ -18,6 +20,9 @@ const app = createApp(App);
 app.use(router);
 
 app.use(createVuestic());
+
+app.component("QuillEditor", QuillEditor);
+
 app.component("vue3-star-ratings", vue3StarRatings);
 
 app.mount("#app");

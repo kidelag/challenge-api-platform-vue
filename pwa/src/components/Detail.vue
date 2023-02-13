@@ -3,6 +3,7 @@ import { onMounted, watchEffect, watch, computed, ref } from "vue";
 import { store, setBuyCourse } from "../store/store";
 import router from "../router";
 import { checkConnection } from "../utils/checkConnection";
+import axios from "axios";
 
 const { user } = store;
 
@@ -47,22 +48,27 @@ const closeCommenting = () => {
 
 const submitComment = () => {
   const body = {
-    courseId: courseId,
-    userId: user.id,
-    star: rating.value,
+    course: "courses/" + courseId,
+    userId: "users/" + user.id,
+    star: Math.round(rating.value),
     content: comment.value,
   };
 
-  commentsList.value.push({
-    Note: rating.value,
-    Commentaire: comment.value,
-    Prénom: user.firstname,
-    Nom: user.lastname,
-  });
-
-  closeCommenting();
-
   console.log("debug", body);
+  axios
+    .post(import.meta.env.VITE_API_URL + "/comments", body)
+    .then(() => {
+      commentsList.value.push({
+        Note: rating.value,
+        Commentaire: comment.value,
+        Prénom: user.firstname,
+        Nom: user.lastname,
+      });
+      closeCommenting();
+    })
+    .catch((err) => {
+      console.log("dbeug", err);
+    });
 };
 
 watch(rating, () => {

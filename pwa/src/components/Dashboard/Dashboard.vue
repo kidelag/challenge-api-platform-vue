@@ -1,5 +1,12 @@
 <script setup>
-import { onMounted, ref, shallowReactive, computed, markRaw } from "vue";
+import {
+  onMounted,
+  watchEffect,
+  ref,
+  shallowReactive,
+  computed,
+  markRaw,
+} from "vue";
 import { checkConnection } from "../../utils/checkConnection";
 import { store } from "../../store/store";
 
@@ -8,34 +15,37 @@ import Gestion from "./Gestion.vue";
 import Profil from "./Profil.vue";
 import Avancement from "./Avancement.vue";
 
-const {
-  user: { isAdmin, isTeacher },
-} = store;
 const minimized = ref(true);
 
-const tabsAdmin = isAdmin
-  ? [
-      {
-        icon: "settings_accessibility",
-        name: "Gestion User",
-        component: Gestion,
-      },
-      { icon: "donut_small", name: "Avancement", component: Avancement },
-    ]
-  : [];
-const tabsTeacher = isTeacher
-  ? [{ icon: "menu_book", name: "Vos cours", component: Cours }]
-  : [];
-
-const userTabs = [{ icon: "face", name: "Profil", component: Profil }];
-
 const config = shallowReactive({
-  tabs: [...tabsAdmin, ...tabsTeacher, ...userTabs],
-  selected: [...tabsAdmin, ...tabsTeacher][0].name,
+  tabs: [],
+  selected: [],
   setSelected(name) {
     this.selected = name;
   },
 });
+
+watchEffect(() => {
+  const tabsAdmin = store.user.isAdmin
+    ? [
+        {
+          icon: "settings_accessibility",
+          name: "Gestion User",
+          component: Gestion,
+        },
+        { icon: "donut_small", name: "Avancement", component: Avancement },
+      ]
+    : [];
+  const tabsTeacher = store.user.isTeacher
+    ? [{ icon: "menu_book", name: "Vos cours", component: Cours }]
+    : [];
+
+  const userTabs = [{ icon: "face", name: "Profil", component: Profil }];
+
+  config.tabs = [...tabsAdmin, ...tabsTeacher, ...userTabs];
+  config.selected = [...tabsAdmin, ...tabsTeacher, ...userTabs][0].name;
+});
+
 const currentPage = computed(() => {
   const tabs = markRaw(config.tabs);
   const index = tabs.findIndex((tab) => tab.name === config.selected);

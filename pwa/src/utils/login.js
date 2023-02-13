@@ -5,7 +5,7 @@ import { store } from "../store/store";
 export const login = (mail, password) => {
   return new Promise((resolve, reject) => {
     axios
-      .post("https://localhost/auth", {
+      .post(import.meta.env.VITE_API_URL + "/auth", {
         mail: mail,
         password: password,
       })
@@ -13,6 +13,7 @@ export const login = (mail, password) => {
         // Récupération du jeton de l'API
 
         const { token, ...user } = data;
+        console.log("debug", data);
 
         store.setConnected(true);
         store.setUser(user);

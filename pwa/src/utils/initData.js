@@ -6,20 +6,25 @@ const getItems = () => {
     const list = {};
 
     axios
-      .get("https://localhost/courses")
+      .get(import.meta.env.VITE_API_URL + "/courses")
       .then(({ data }) => {
-        data["hydra:member"].map((item) => {
-          list[item.id] = {
-            id: item.id,
-            title: item.title,
-            description: item.description,
-            content: item.content,
-            possessed: true,
-            pdf: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
-          };
-        });
+        axios
+          .get(import.meta.env.VITE_API_URL + "/user_courses")
+          .then(({ data: userCourses }) => {
+            console.log(userCourses);
 
-        resolve(list);
+            data["hydra:member"].map((item) => {
+              list[item.id] = {
+                id: item.id,
+                title: item.title,
+                description: item.description,
+                content: item.content,
+                possessed: false,
+              };
+            });
+
+            resolve(list);
+          });
       })
       .catch((err) => {
         console.log("debug init data", err);

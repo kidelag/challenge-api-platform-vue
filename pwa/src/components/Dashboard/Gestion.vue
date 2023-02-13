@@ -7,7 +7,7 @@ const editedUser = ref(null);
 
 const {
   data: { ["hydra:member"]: usersRaw },
-} = await axios.get("https://localhost/users");
+} = await axios.get(import.meta.env.VITE_API_URL + "/users");
 
 const users = ref(
   usersRaw.map((user) => ({
@@ -59,7 +59,12 @@ const input = "";
   <div class="wrapperPage">
     <h1>Gestion des Utilisateurs</h1>
     <div class="wrapperUsers">
-      <va-data-table :items="users" :columns="columns"
+      <va-data-table
+        :items="users"
+        :columns="columns"
+        :wrapper-size="500"
+        :item-size="46"
+        virtual-scroller
         ><template #cell(actions)="{ rowIndex }">
           <va-button
             preset="plain"

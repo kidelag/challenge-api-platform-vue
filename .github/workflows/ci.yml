@@ -47,7 +47,7 @@ jobs:
         run: docker compose exec -T php bin/phpunit
   docker:
     runs-on: ubuntu-latest
-    env: 
+    env:
         working-directory: ./api
     steps:
       - name: Set up QEMU
@@ -84,14 +84,14 @@ jobs:
               echo "APP_SECRET=SECRET_KEY" >> .env
               echo "TRUSTED_PROXIES=127.0.0.1" >> .env
               echo "TRUSTED_HOSTS=^challenge.matthieucmp.eu$" >> .env
-              echo "DATABASE_URL='mysql://root:Mlambr753@127.0.0.1:3306/challenge?serverVersion=5.7'" >> .env
+              echo "DATABASE_URL=${{ secrets.ENV_SQL }}" >> .env
               echo "CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'" >> .env
               echo "JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem" >> .env
               echo "JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem" >> .env
-              echo "JWT_PASSPHRASE=0aedc7c1c0b7a5a0010c28b7d85f8ea2" >> .env
-              echo "MERCURE_URL=http://caddy/.well-known/mercure" >> .env
-              echo "MERCURE_PUBLIC_URL=https://localhost/.well-known/mercure" >> .env
-              echo "MERCURE_JWT_SECRET='!ChangeThisMercureHubJWTSecretKey!'" >> .env
+              echo "JWT_PASSPHRASE=${{ secrets.JWT_PASSPHRASE }}" >> .env
+              echo "MERCURE_URL=${{ secrets.MERCURE_URL }}" >> .env
+              echo "MERCURE_PUBLIC_URL=${{ secrets.MERCURE_PUBLIC_URL }}" >> .env
+              echo "MERCURE_JWT_SECRET=${{ secrets.MERCURE_JWT_SECRET }}" >> .env
               composer install
               bin/console d:s:u --force
               cd /var/www/html/
@@ -102,4 +102,6 @@ jobs:
             composer install
             cd ..
             cd pwa
+            echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > .env
+            npm install
             npm run build
