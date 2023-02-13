@@ -33,7 +33,26 @@ onMounted(() => {
 });
 
 const handleBuy = () => {
-  setBuyCourse(courseId);
+  axios
+    .post(
+      import.meta.env.VITE_API_URL + "/user_courses",
+      {
+        account: "users/" + store.user.id,
+        course: "courses/" + courseId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${store.user.token}`,
+        },
+      }
+    )
+    .then(() => {
+      setBuyCourse(courseId);
+      console.log("cours acheté");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const handleComment = () => {
@@ -54,21 +73,24 @@ const submitComment = () => {
     content: comment.value,
   };
 
-  console.log("debug", body);
-  axios
-    .post(import.meta.env.VITE_API_URL + "/comments", body)
-    .then(() => {
-      commentsList.value.push({
-        Note: rating.value,
-        Commentaire: comment.value,
-        Prénom: user.firstname,
-        Nom: user.lastname,
-      });
-      closeCommenting();
-    })
-    .catch((err) => {
-      console.log("dbeug", err);
-    });
+  // axios
+  //   .post(import.meta.env.VITE_API_URL + "/comments", body, {
+  //     headers: {
+  //       Authorization: `Bearer ${store.user.token}`,
+  //     },
+  //   })
+  //   .then(() => {
+  commentsList.value.push({
+    Note: rating.value,
+    Commentaire: comment.value,
+    Prénom: user.firstname,
+    Nom: user.lastname,
+  });
+  closeCommenting();
+  // })
+  // .catch((err) => {
+  //   console.log("dbeug", err);
+  // });
 };
 
 watch(rating, () => {
@@ -81,7 +103,6 @@ watch(rating, () => {
     <h1>{{ course?.title }}</h1>
 
     <div class="description">{{ course?.description }}</div>
-    <div class="content">{{ course?.content }}</div>
 
     <button
       class="btn btn-primary"

@@ -36,7 +36,7 @@ class RequestPasswordController extends AbstractController
             $this->manager->persist($user);
             $this->manager->flush();
 
-            $link = 'http://localhost:8080/reset_password?token='.$user->getToken();
+            $link = 'http://learn.matthieucmp.eu/reset_password?token='.$user->getToken();
             $mail = (new Email())
                 ->from('no-reply@challenge.fr')
                 ->to($user->getMail())

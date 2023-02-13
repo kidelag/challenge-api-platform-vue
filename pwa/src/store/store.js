@@ -11,8 +11,8 @@ const initStore = {
     firstname: "",
     lastname: "",
     isAdmin: false,
-    isTeacher: true,
-    isTeacherValid: true,
+    isTeacher: false,
+    isTeacherValid: false,
     token: "",
   },
   courses: { list: {}, selected: null },
@@ -40,6 +40,10 @@ export const store = reactive({
   setToken(token) {
     this.user.token = token;
   },
+  setProf(isTeacher, isValid) {
+    this.user.isTeacher = isTeacher;
+    this.user.isTeacherValid = isValid;
+  },
   selectCourse(id) {
     this.courses.selected = id;
   },
@@ -60,10 +64,19 @@ export const store = reactive({
 
 export const setBuyCourse = (id) => {
   const courses = toRaw(store.courses.list);
-  console.log("debug", courses[1].possessed);
-  const courseIndex = courses.findIndex((course) => course.id === parseInt(id));
 
-  courses[courseIndex].possessed = true;
+  const arrayCourses = Object.keys(courses).map((cle) => {
+    return [Number(cle), courses[cle]];
+  });
+  const arrayFiltered = arrayCourses.filter((course) => {
+    return course[1].id === parseInt(id);
+  });
 
-  store.courses.list.splice(courseIndex, 1, courses[courseIndex]);
+  courses[arrayFiltered[0][0]].possessed = true;
+
+  store.courses.list.splice(
+    arrayFiltered[0][0],
+    1,
+    courses[arrayFiltered[0][0]]
+  );
 };

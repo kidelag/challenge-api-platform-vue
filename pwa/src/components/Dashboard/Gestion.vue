@@ -1,13 +1,18 @@
 <script async setup>
 import axios from "axios";
 import { ref } from "vue";
+import { store } from "../../store/store";
 
 const editedUserId = ref(null);
 const editedUser = ref(null);
 
 const {
   data: { ["hydra:member"]: usersRaw },
-} = await axios.get(import.meta.env.VITE_API_URL + "/users");
+} = await axios.get(import.meta.env.VITE_API_URL + "/users", {
+  headers: {
+    Authorization: `Bearer ${store.user.token}`,
+  },
+});
 
 const users = ref(
   usersRaw.map((user) => ({

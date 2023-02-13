@@ -33,7 +33,7 @@ watchEffect(() => {
           name: "Gestion User",
           component: Gestion,
         },
-        { icon: "donut_small", name: "Avancement", component: Avancement },
+        // { icon: "donut_small", name: "Avancement", component: Avancement },
       ]
     : [];
   const tabsTeacher = store.user.isTeacher
