@@ -102,4 +102,5 @@ jobs:
             composer install
             cd ..
             cd pwa
+            npm install
             npm run build
