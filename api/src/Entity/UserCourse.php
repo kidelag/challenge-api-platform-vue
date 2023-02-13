@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\UserCourseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,6 +16,9 @@ use Doctrine\ORM\Mapping as ORM;
 )]
 #[Get(
     // security: 'is_granted("IS_AUTHENTICATED_FULLY") and object.account === user'
+)]
+#[Post(
+    security: 'is_granted("IS_AUTHENTICATED_FULLY")'
 )]
 class UserCourse
 {
