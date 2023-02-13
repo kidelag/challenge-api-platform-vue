@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/mep 
   pull_request: ~
   workflow_dispatch: ~
 
@@ -64,3 +65,41 @@ jobs:
           context: "{{defaultContext}}:api"
           push: true
           tags: matthieucmp/test-ci:latest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: | 
+            cd /var/www/html/
+            if [ ! -d challenge-api-platform-vue ]; then
+              git clone git@github.com:kidelag/challenge-api-platform-vue.git
+              cd challenge-api-platform-vue/api
+              echo "APP_ENV=prod" > .env
+              echo "APP_SECRET=SECRET_KEY" >> .env
+              echo "TRUSTED_PROXIES=127.0.0.1" >> .env
+              echo "TRUSTED_HOSTS=^challenge.matthieucmp.eu$" >> .env
+              echo "DATABASE_URL='mysql://root:Mlambr753@127.0.0.1:3306/challenge?serverVersion=5.7'" >> .env
+              echo "CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'" >> .env
+              echo "JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem" >> .env
+              echo "JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem" >> .env
+              echo "JWT_PASSPHRASE=0aedc7c1c0b7a5a0010c28b7d85f8ea2" >> .env
+              echo "MERCURE_URL=http://caddy/.well-known/mercure" >> .env
+              echo "MERCURE_PUBLIC_URL=https://localhost/.well-known/mercure" >> .env
+              echo "MERCURE_JWT_SECRET='!ChangeThisMercureHubJWTSecretKey!'" >> .env
+              composer install
+              bin/console d:s:u --force
+              cd /var/www/html/
+            fi
+            cd challenge-api-platform-vue
+            git pull
+            cd api
+            composer install
+            cd ..
+            cd pwa
+            npm run build
