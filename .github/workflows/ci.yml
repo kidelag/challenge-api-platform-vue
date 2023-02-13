@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/mep 
   pull_request: ~
   workflow_dispatch: ~
 
@@ -93,6 +92,7 @@ jobs:
               echo "MERCURE_PUBLIC_URL=${{ secrets.MERCURE_PUBLIC_URL }}" >> .env
               echo "MERCURE_JWT_SECRET=${{ secrets.MERCURE_JWT_SECRET }}" >> .env
               echo "CORS_ALLOW_ORIGIN=['*']" >> .env
+              echo "MAILER_DSN=${{ secrets.MAILER_DSN }}" >> .env
               composer install
               bin/console d:s:u --force
               cd /var/www/html/
