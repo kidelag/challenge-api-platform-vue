@@ -31,10 +31,10 @@ class Comment
     private ?int $star = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    private string|null|\DateTimeInterface $createdAt = 'NOW';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $updatedAt = null;
+    private string|null|\DateTimeInterface $updatedAt = 'NOW';
 
     public function getId(): ?int
     {
