@@ -7,8 +7,9 @@
     
 }
 
-div#app > div.wrapper {
+div#app > main {
     min-height: 100vh;
+    padding: 0 15vw;
 }
 div#app {
     overflow-x: hidden;

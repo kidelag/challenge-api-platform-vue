@@ -39,6 +39,7 @@
   display: flex;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch; /* pour le scroll mobile */
+  margin-bottom: 7rem;
 
 }
 

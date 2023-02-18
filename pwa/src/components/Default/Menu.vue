@@ -38,7 +38,9 @@ const handleLogout = () => {
 
 
         <div class="item-nav left">
-          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+          <div class="inl-icon">
+            <va-icon name="shopping-cart"/>
+          </div>
           <div class="role left-item" v-if="store.user.isAdmin && store.user.isConnected">Admin</div>
           <div class="role left-item" v-if="store.user.isTeacherValid && store.user.isConnected">Professeur</div>
 
@@ -118,6 +120,11 @@ div.container-nav {
   display: flex;
   justify-content: end;
 }
+
+.left > div.inl-icon {
+  margin: auto;
+}
+
 .left-item{
   margin-left: 0.5rem;
 }

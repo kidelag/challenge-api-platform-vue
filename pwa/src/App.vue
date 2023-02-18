@@ -17,6 +17,59 @@ const modalRef = ref(null);
 const closeModal = () => Modal.getInstance(modalRef.value)?.hide();
 
 initData();
+
+const links1 = [
+  {
+    title: "Google",
+    link: "https://www.google.com"
+  },
+  {
+    title: "Twitter",
+    link: "https://www.twitter.com"
+  },
+  {
+    title: "Facebook",
+    link: "https://www.facebook.com"
+  },
+  {
+    title: "Twitch",
+    link: "https://www.twitch.tv"
+  },
+  
+]
+
+const links2 = [
+  {
+    title: "Yahoo",
+    link: "https://www.yahoo.com"
+  },
+  {
+    title: "Instagram",
+    link: "https://www.instagram.com"
+  },
+  {
+    title: "Spotify",
+    link: "https://www.spotify.com"
+  },
+  
+]
+
+const links3 = [
+  {
+    title: "Amazon",
+    link: "https://www.amazon.com"
+  },
+  {
+    title: "Microsoft",
+    link: "https://www.microsoft.com"
+  },
+  {
+    title: "Apple",
+    link: "https://www.apple.com"
+  },
+  
+]
+
 </script>
 
 <template>
@@ -73,11 +126,11 @@ initData();
 
 
   <main>
-    <RouterView />
+    <RouterView/>
   </main>
 
 
-  <Footer />
+  <Footer :links1="links1" :links2="links2" :links3="links3"/>
 
 </template>
 

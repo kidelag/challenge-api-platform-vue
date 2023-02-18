@@ -1,4 +1,21 @@
 <script setup>
+
+const props = defineProps({
+    links1: {
+        type: Object,
+        required: true,
+    },
+    links2: {
+        type: Object,
+        required: true,
+    },
+    links3: {
+        type: Object,
+        required: true,
+    },
+
+});
+
 </script>
 
 <template>
@@ -7,27 +24,20 @@
 
       <div class="c-left">
         <div class="item-footer footer-left">
-          <ul class="fl-ul">
-            <li><a href="#" class="f-light">test A1</a></li>
-            <li><a href="#" class="f-light">test A2</a></li>
-            <li><a href="#" class="f-light">test A3</a></li>
-            <li><a href="#" class="f-light">test A3</a></li>
+          <ul v-for="item in links1" class="fl-ul">
+            <li><a :href="item.link" class="f-light" target="_blank">{{ item.title }}</a></li>
           </ul>
         </div>
 
         <div class="item-footer footer-middle">
-          <ul class="fl-ul">
-            <li><a href="#" class="f-light">test B1</a></li>
-            <li><a href="#" class="f-light">test B2</a></li>
-            <li><a href="#" class="f-light">test B3</a></li>
+          <ul v-for="item in links2" class="fl-ul">
+            <li><a :href="item.link" class="f-light" target="_blank">{{ item.title }}</a></li>
           </ul>
         </div>
 
         <div class="item-footer footer-right">
-          <ul class="fl-ul">
-            <li><a href="#" class="f-light">test B1</a></li>
-            <li><a href="#" class="f-light">test B2</a></li>
-            <li><a href="#" class="f-light">test B3</a></li>
+          <ul v-for="item in links3" class="fl-ul">
+            <li><a :href="item.link" class="f-light" target="_blank">{{ item.title }}</a></li>
           </ul>
         </div>
       </div>
