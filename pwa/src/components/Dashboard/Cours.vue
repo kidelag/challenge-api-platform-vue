@@ -200,6 +200,9 @@ const resetCreate = () => {
   };
   creatingCourse.value = false;
 };
+
+getElementByClass("va-modal__default-cancel-button").classList.add('bttn bttn-prim-out');
+
 </script>
 
 <template>
@@ -217,13 +220,13 @@ const resetCreate = () => {
     </h1>
     <h1 v-else>Un administrateur va valider votre demande.</h1>
 
-    <va-button
+    <button class="bttn bttn-drk"
       @click="
         () => {
           creatingCourse = !creatingCourse;
         }
       "
-      >Ajouter un cours</va-button
+      >Ajouter un cours</button
     >
     <va-modal
       class="modalCreateCourse"
@@ -293,8 +296,8 @@ const resetCreate = () => {
 <style lang="scss" scoped>
 .wrapperPage {
   display: flex;
-
   flex-direction: column;
+  padding: 3rem 5rem;
 }
 
 .modalEditCourse {
@@ -307,4 +310,9 @@ const resetCreate = () => {
     display: block;
   }
 }
+
+button.va-modal__default-cancel-button > span{
+  color: wheat;
+}
+
 </style>

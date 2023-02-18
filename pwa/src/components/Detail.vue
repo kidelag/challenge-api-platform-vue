@@ -105,7 +105,7 @@ watch(rating, () => {
     <div class="description">{{ course?.description }}</div>
 
     <button
-      class="btn btn-primary"
+      class="bttn bttn-prim"
       type="submit"
       v-if="!store.user.isConnected"
       data-bs-toggle="modal"
@@ -117,7 +117,7 @@ watch(rating, () => {
     <router-link
       v-if="course?.possessed && store.user.isConnected"
       :to="`/course/${courseId}`"
-      class="btn btn-outline-primary"
+      class="bttn bttn-prim-out"
       >Reprendre ce cours</router-link
     >
     <div class="wrapperCommentsList">
@@ -125,7 +125,7 @@ watch(rating, () => {
     </div>
     <button
       v-if="!course?.possessed && store.user.isConnected"
-      class="btn btn-primary"
+      class="bttn bttn-prim"
       @click="handleBuy"
     >
       Acheter ce cours
@@ -136,19 +136,19 @@ watch(rating, () => {
         v-model="comment"
         placeholder="Rentrez votre commentaire ici"
       ></textarea>
-      <button class="btn btn-primary" @click="submitComment">
+      <button class="bttn bttn-prim" @click="submitComment">
         Valider le commentaire
       </button>
     </div>
     <button
-      class="btn btn-primary"
+      class="bttn bttn-prim"
       v-else-if="course?.possessed && store.user.isConnected"
       @click="handleComment"
     >
       Laisser un commentaire
     </button>
     <button
-      class="btn btn-primary-outline"
+      class="bttn bttn-prim-out"
       v-if="course?.possessed && store.user.isConnected && commenting"
       @click="closeCommenting"
     >
