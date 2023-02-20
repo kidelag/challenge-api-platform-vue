@@ -75,6 +75,9 @@ class Former
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private string|null|\DateTimeInterface $updated_at = 'NOW';
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $refused = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -160,6 +163,18 @@ class Former
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function isRefused(): ?bool
+    {
+        return $this->refused;
+    }
+
+    public function setRefused(?bool $refused): self
+    {
+        $this->refused = $refused;
 
         return $this;
     }
