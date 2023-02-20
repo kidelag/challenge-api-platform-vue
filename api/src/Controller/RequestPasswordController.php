@@ -38,7 +38,7 @@ class RequestPasswordController extends AbstractController
 
             $link = 'http://learn.matthieucmp.eu/reset_password?token='.$user->getToken();
             $mail = (new Email())
-                ->from('no-reply@challenge.fr')
+                ->from('campagne.matthieu@gmail.com')
                 ->to($user->getMail())
                 ->subject('eLearning - Votre demande de changement de mot de passe')
                 ->html(

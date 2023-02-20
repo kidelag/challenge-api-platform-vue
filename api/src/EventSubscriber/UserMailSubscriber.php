@@ -56,7 +56,7 @@ class UserMailSubscriber implements EventSubscriberInterface
         $link = 'http://learn.matthieucmp.eu/validate/' . $user->getToken();
         $mail = (new Email())
             ->to($user->getMail())
-            ->from('no-reply@challenge.fr')
+            ->from('campagne.matthieu@gmail.com')
             ->subject('eLearning - Vérifiez votre compte')
             ->html(
                 'Merci de vérifier votre compte en cliquant sur le lien suivant : <a href="' . $link . '">Vérifiez votre compte</a>'
