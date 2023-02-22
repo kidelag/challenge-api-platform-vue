@@ -109,4 +109,16 @@ initData();
   <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.wrapperRole {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-right: 1vw;
+
+  div {
+    margin-top: 0.2rem;
+  }
+}
+</style>

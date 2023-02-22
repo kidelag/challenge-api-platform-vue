@@ -49,8 +49,6 @@ watchEffect(() => {
         });
     });
   } else {
-    console.log("debug", store.user.firstname);
-
     coursesRaw
       .filter(
         (courseItem) =>
@@ -212,12 +210,13 @@ const resetCreate = () => {
     >
       Gérer les cours
     </h1>
-    <h1 v-else-if="store.user.isTeacherValid && store.user.isTeacher">
-      Gérer vos cours
-    </h1>
     <h1 v-else>Un administrateur va valider votre demande.</h1>
 
     <va-button
+      v-if="
+        (store.user.isTeacherValid && store.user.isTeacher) ||
+        store.user.isAdmin
+      "
       @click="
         () => {
           creatingCourse = !creatingCourse;
@@ -244,6 +243,10 @@ const resetCreate = () => {
     </va-modal>
 
     <va-data-table
+      v-if="
+        (store.user.isTeacherValid && store.user.isTeacher) ||
+        store.user.isAdmin
+      "
       :items="courses"
       :columns="columns"
       :wrapper-size="500"
@@ -261,6 +264,12 @@ const resetCreate = () => {
           preset="plain"
           icon="close"
           @click="reviewCourse(false, courses[rowIndex].id, rowIndex)"
+        />
+        <va-button
+          v-if="!courses[rowIndex].isValid && store.user.isAdmin"
+          preset="plain"
+          icon="open_in_new"
+          @click="openModalToEditItemById(rowIndex)"
         />
         <va-button
           v-else

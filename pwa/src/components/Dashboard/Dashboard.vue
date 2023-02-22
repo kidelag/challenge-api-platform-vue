@@ -33,11 +33,14 @@ watchEffect(() => {
           name: "Gestion User",
           component: Gestion,
         },
+        { icon: "menu_book", name: "Vos cours", component: Cours },
         // { icon: "donut_small", name: "Avancement", component: Avancement },
       ]
     : [];
   const tabsTeacher = store.user.isTeacher
-    ? [{ icon: "menu_book", name: "Vos cours", component: Cours }]
+    ? !store.user.isAdmin
+      ? [{ icon: "menu_book", name: "Vos cours", component: Cours }]
+      : []
     : [];
 
   const userTabs = [{ icon: "face", name: "Profil", component: Profil }];
@@ -87,9 +90,11 @@ onMounted(() => {
       </va-sidebar-item>
     </va-sidebar>
 
-    <Suspense>
-      <component v-bind:is="currentPage"></component>
-    </Suspense>
+    <div class="wrapperComponent">
+      <Suspense>
+        <component v-bind:is="currentPage"></component>
+      </Suspense>
+    </div>
   </div>
 </template>
 
@@ -98,5 +103,12 @@ onMounted(() => {
   display: flex;
 
   max-width: 100vw;
+}
+
+.wrapperComponent {
+  display: flex;
+  width: 90vw;
+
+  justify-content: center;
 }
 </style>
