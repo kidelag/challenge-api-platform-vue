@@ -102,10 +102,10 @@ watch(rating, () => {
   <div class="wrapper">
     <h1>{{ course?.title }}</h1>
 
-    <div class="description">{{ course?.description }}</div>
+    <div class="description">Description: {{ course?.description }}</div>
 
     <button
-      class="bttn bttn-prim"
+      class="bttn bttn-succ"
       type="submit"
       v-if="!store.user.isConnected"
       data-bs-toggle="modal"
@@ -121,13 +121,15 @@ watch(rating, () => {
       >Reprendre ce cours</router-link
     >
     <div class="wrapperCommentsList">
+      <h4>Les commentaires:</h4>
       <va-data-table :items="commentsList" />
     </div>
     <button
       v-if="!course?.possessed && store.user.isConnected"
-      class="bttn bttn-prim"
+      class="bttn bttn-succ"
       @click="handleBuy"
     >
+    <va-icon name="add_shopping_cart"/>
       Acheter ce cours
     </button>
     <div class="wrapperComment" v-if="commenting">
@@ -163,8 +165,14 @@ watch(rating, () => {
   text-align: center;
 }
 
+.description {
+  margin-bottom: 5vh;
+}
+
 .wrapperCommentsList {
-  margin: 3vh 0;
+  margin: 15vh auto 3vh auto;
+  width: 50%;
+
 }
 
 .wrapperComment {

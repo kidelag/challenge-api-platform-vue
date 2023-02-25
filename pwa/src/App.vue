@@ -82,7 +82,7 @@ const links3 = [
         </div>
         <div class="close">
           <button class="bttn-close">
-            x
+            <va-icon name="close" />
           </button>  
         </div>
       </div>
@@ -99,7 +99,7 @@ const links3 = [
 
         <div class="close-flash-message">
           <button class="bttn-close">
-            x
+            <va-icon name="close" />
           </button>  
         </div>
       </div>
@@ -136,6 +136,10 @@ const links3 = [
 
 <style scoped>
 
+div.nav-message-container{
+  padding: 0 15vw;
+}
+
 div.nav-message {
   text-align: center;
   padding: 1rem 0;
@@ -151,12 +155,12 @@ div.message {
 
 div.close {
   flex: 1;
-  margin-right: 2rem;
+  /* margin-right: 2rem; */
 }
 
 button.bttn-close {
-  width: 2rem;
-  height: 2rem;
+  /* width: 2rem;
+  height: 2rem; */
 }
 
 
@@ -182,10 +186,14 @@ div.message-flash-message {
   flex: 10;
 }
 
+span.span-flash-message {
+  font-weight: bold;
+}
+
 div.close-flash-message {
   /* background-color: blue; */
   flex: 1;
-  margin-right: 2rem;
+  /* margin-right: 2rem; */
 }
 
 

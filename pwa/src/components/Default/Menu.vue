@@ -16,49 +16,56 @@ const handleLogout = () => {
 
 <template>
 
-<nav class="navbar-nav">
-      <div class="container-nav">
+  <nav class="navbar-nav">
+    <div class="container-nav">
 
-        <RouterLink to="/" class="item-nav home">E learning</RouterLink>
+      <RouterLink to="/" class="item-nav home">E learning</RouterLink>
 
-        <!--<button class="item-nav list" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span></span>
-        </button>-->
+      <!--<button class="item-nav list" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+      </button>-->
 
-        
-        <div class="item-nav links">
-          <div>
-            <RouterLink to="/">Accueil</RouterLink>
-          </div>
-          <div class="fill" v-if="store.user.isConnected"></div>
-          <div v-if="store.user.isConnected">
-            <RouterLink to="/dashboard">Vos cours</RouterLink>
-          </div>
+      
+      <div class="item-nav links">
+        <div>
+          <RouterLink to="/">Accueil</RouterLink>
         </div>
-
-
-        <div class="item-nav left">
-          <div class="inl-icon">
-            <va-icon name="shopping-cart"/>
-          </div>
-          <div class="role left-item" v-if="store.user.isAdmin && store.user.isConnected">Admin</div>
-          <div class="role left-item" v-if="store.user.isTeacherValid && store.user.isConnected">Professeur</div>
-
-          <button class="bttn bttn-succ bttn-login left-item" v-if="!store.user.isConnected" data-bs-toggle="modal" data-bs-target="#ModalConnection">
-            Connexion
-          </button>
-
-          <button class="bttn bttn-dng bttn-logout left-item" v-if="store.user.isConnected" type="button" @click="handleLogout">
-            Déconnexion
-          </button>
-          <button class="bttn bttn-drk-out bttn-theme left-item" type="button">
-            O
-          </button>
-          
+        <div class="fill" v-if="store.user.isConnected"></div>
+        <div v-if="store.user.isConnected">
+          <RouterLink to="/dashboard">Vos cours</RouterLink>
         </div>
-
       </div>
-    </nav>
+
+
+      <div class="item-nav left">
+        <button class="bttn bttn-cart">
+          <va-icon name="shopping_cart" style="position: absolute;"/>
+          <div class="sc-count">10</div>
+        </button>
+
+        <div class="role left-item" v-if="store.user.isAdmin && store.user.isConnected">Admin</div>
+        <div class="role left-item" v-if="store.user.isTeacherValid && store.user.isConnected">Professeur</div>
+        
+        <button class="bttn bttn-succ bttn-login left-item" v-if="!store.user.isConnected" data-bs-toggle="modal" data-bs-target="#ModalConnection">
+          Connexion
+        </button>
+
+        <button class="bttn bttn-dng bttn-logout left-item" v-if="store.user.isConnected" type="button" @click="handleLogout">
+          Déconnexion
+        </button>
+        <button class="bttn bttn-drk-out bttn-theme left-item" type="button">
+          <va-icon name="light_mode"/>
+        </button>
+
+        <!--<button class="bttn bttn-drk bttn-theme left-item" type="button">
+            <va-icon name="dark_mode"/>
+            <va-icon name="light_mode"/>
+          </button>-->
+        
+      </div>
+
+    </div>
+  </nav>
 
 </template>
 
@@ -133,6 +140,18 @@ div.left > div.role {
   margin: auto 0 auto 0.5rem;
   color: var(--color-text-light);
 
+}
+
+button.bttn-cart {
+  margin-right: 1rem;
+}
+
+button.bttn-cart > div.sc-count{
+  position: relative;
+  top: 1rem;
+  left: 30px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 </style>

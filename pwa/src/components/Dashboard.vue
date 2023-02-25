@@ -7,13 +7,13 @@ import {
   computed,
   markRaw,
 } from "vue";
-import { checkConnection } from "../../utils/checkConnection";
-import { store } from "../../store/store";
+import { checkConnection } from "../utils/checkConnection";
+import { store } from "../store/store";
 
-import Cours from "./Cours.vue";
-import Gestion from "./Gestion.vue";
-import Profil from "./Profil.vue";
-import Avancement from "./Avancement.vue";
+import Cours from "./Dashboard/Cours.vue";
+import Gestion from "./Dashboard/Gestion.vue";
+import Profil from "./Dashboard/Profil.vue";
+import Avancement from "./Dashboard/Avancement.vue";
 
 const minimized = ref(true);
 
@@ -65,21 +65,8 @@ onMounted(() => {
 <template>
   <div style="height: 90vh" class="wrapper">
     <va-sidebar :minimized="minimized" minimizedWidth="64px">
-      <va-icon
-        class="m-3"
-        name="arrow_forward"
-        @click="toggleMenu"
-        :rotation="!minimized ? 180 : 0"
-      />
-      <va-sidebar-item
-        v-for="tab in config.tabs"
-        :active="tab.name === config.selected"
-        @click="
-          () => {
-            config.setSelected(tab.name);
-          }
-        "
-      >
+      <va-icon class="m-3" name="arrow_forward" @click="toggleMenu" :rotation="!minimized ? 180 : 0"/>
+      <va-sidebar-item v-for="tab in config.tabs" :active="tab.name === config.selected" @click="() => {config.setSelected(tab.name);}">
         <va-sidebar-item-content>
           <va-icon :name="tab.icon" />
           <va-sidebar-item-title>{{ tab.name }}</va-sidebar-item-title>

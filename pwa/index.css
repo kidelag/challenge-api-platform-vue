@@ -9,7 +9,6 @@
 
 div#app > main {
     min-height: 100vh;
-    padding: 0 15vw;
 }
 div#app {
     overflow-x: hidden;
@@ -51,6 +50,7 @@ a.bttn {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
+    text-decoration: none;
 }
   
 button.bttn:after, a.bttn:after {

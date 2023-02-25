@@ -10,12 +10,17 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: "/db",
+      name: "db",
+      component: () => import("../components/Dashboardv2/Dashboard.vue"),
+    },
+    {
       path: "/dashboard",
       name: "dashboard",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../components/Dashboard/Dashboard.vue"),
+      component: () => import("../components/Dashboard.vue"),
     },
     {
       path: "/register",
@@ -31,6 +36,11 @@ const router = createRouter({
       path: "/course/:id",
       name: "course",
       component: () => import("../components/Course.vue"),
+    },
+    {
+      path: "/list-courses/",
+      name: "list-courses",
+      component: () => import("../components/ListCourses.vue"),
     },
     {
       path: "/validate/:token",
