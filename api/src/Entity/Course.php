@@ -80,6 +80,9 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: UserCourse::class, orphanRemoval: true)]
     private Collection $userCourses;
 
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    private $image = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -262,6 +265,18 @@ class Course
                 $userCourse->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
