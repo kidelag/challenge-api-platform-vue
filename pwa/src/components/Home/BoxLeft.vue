@@ -40,38 +40,32 @@ const props = defineProps({
 </template>
 
 
-<style scoped>
+<style lang="scss" scoped>
 
 div.box-container {
-    margin: 0 0 7rem 0;
-}
+    margin-bottom: 7rem;
+    
+    h2.title-box {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 5rem;
+    }
+    div.bc-main {
+        display: flex;
+        width: 100%;
 
-div.box-container > div.title-box {
-    text-align: center;
-    /* font-size: 2.5rem; */
-    width: 100%;
-}
+        div.box-left > img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+        }
 
-div.box-container > div.bc-main {
-    display: flex;
-    width: 100%;
-
-}
-
-div.box-container > div.bc-main > div.box-left {
-    /* flex: 2; */
-}
-
-div.box-container > div.bc-main > div.box-left > img {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-}
-
-div.box-container > div.bc-main > div.box-right {
-    flex: auto;
-    padding: 1rem 0 0 1rem;
-    text-align: left;
+        div.box-right {
+            flex: auto;
+            padding: 0 0 0 1rem;
+            text-align: left;
+        }
+    }
 }
 
 

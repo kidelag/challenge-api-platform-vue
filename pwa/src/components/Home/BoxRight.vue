@@ -43,7 +43,7 @@ const props = defineProps({
 <style scoped>
 
 div.box-container {
-    margin: 0 0 7rem 0;
+    margin-bottom: 4rem;
 }
 
 div.box-container > div.title-box {
@@ -60,13 +60,10 @@ div.box-container > div.bc-main {
 
 div.box-container > div.bc-main > div.box-left {
     flex: auto;
-    padding: 1rem 1rem 0 0;
+    padding: 0 1rem 0 0;
     text-align: right;
 }
 
-div.box-container > div.bc-main > div.box-right {
-    /* flex: 2; */
-}
 
 div.box-container > div.bc-main > div.box-right > img {
     width: 250px;

@@ -8,6 +8,7 @@ import Carrousel from "./Home/Carousel.vue";
 import BoxLeft from "./Home/BoxLeft.vue";
 import BoxRight from "./Home/BoxRight.vue";
 import IconBox from "./Home/IconBox.vue";
+import Cookie from "./Home/Cookie.vue";
 
 const items = ref({});
 const validItems = ref({});
@@ -26,18 +27,19 @@ watchEffect(() => {
   }
 });
 
+
 const content = [
       {
         icon: "star",
-        text: "test"
+        text: "Flexibilité"
       },
       {
         icon: "redeem",
-        text: "test"
+        text: "Adaptabilité"
       },
       {
         icon: "sell",
-        text: "test"
+        text: "Discipline"
       },
     ]
 
@@ -46,23 +48,70 @@ let cnt = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam d
 
 <template>
   <div class="wrapper">
-    <h1>Nos formations</h1>
 
-    <Carrousel :title="'Les derniers cours ajoutés : '" :validItems="validItems"/>
-    <BoxLeft :title="'Les derniers cours ajoutés : '" :text="cnt" :img="'https://via.placeholder.com/250x250'"/>
-    <BoxRight :title="'Les derniers cours ajoutés : '" :text="cnt" :img="'https://via.placeholder.com/250x250'"/>
+    <div class="first-home-item">
+      <div>
+        <h1>Nos formations</h1>
+        <Carrousel :title="'Les derniers cours ajoutés : '" :validItems="validItems"/>
+      </div>
+    </div>
 
-    <IconBox :content="content"/>
+    <div class="second-home-item">
+      
+      <BoxLeft :title="'Ils témoignent '" :text="cnt" :img="'../../../public/working-people-1.jpg'"/>
+      <BoxRight :title="''" :text="cnt" :img="'../../../public/working-people-2.jpg'"/>
+    </div>
+
+    <div class="thrid-home-item">
+      <IconBox :content="content"/>
+    </div>
+
+
 
   </div>
+
+  <Cookie/>
   
 
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+
 .wrapper {
-  padding: 3vh 3vw;
   text-align: center;
+  padding-top: 4rem;
+  width: 100%;
+
+  div.second-home-item {
+    background-color: rgb(245, 245, 245);
+    padding: 2rem 0;
+    margin-bottom: 7rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+@media (min-width: 992px){
+  div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
+    max-width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+@media (min-width: 768px){
+  div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
 }
 
 

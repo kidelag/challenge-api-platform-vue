@@ -3,6 +3,8 @@
 import { store } from "../store/store";
 import { ref, watchEffect } from "vue";
 
+import ItemCourse from "./Courses/ItemCourse.vue";
+
 const items = ref({});
 const validItems = ref({});
 
@@ -20,12 +22,16 @@ watchEffect(() => {
   }
 });
 
+
 </script>
 
 <template>
     <div class="wrapper">
-        <h1>Title</h1>
+        <h1>Liste des cours :</h1>
         <div class="categories"></div>
+        <div class="wrapper-item" v-for="item in validItems">
+            <ItemCourse :title="item.title" :description="item.description" :id="item.id"/>
+        </div>
 
 
     </div>
@@ -34,10 +40,7 @@ watchEffect(() => {
 <style scoped>
 
     div.wrapper {
-        min-height: 100vh;
-        width: 60vw;
-        margin: 5vh auto;
-        background-color: blue;
+        padding: 2rem 0;
     }
 
 @media (min-width: 1280px) {
