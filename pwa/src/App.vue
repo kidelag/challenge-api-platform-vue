@@ -12,6 +12,7 @@ import LoginView from "./views/LoginView.vue";
 
 import { initData } from "./utils/initData";
 
+import toastr from 'toastr';
 
 const modalRef = ref(null);
 const closeModal = () => Modal.getInstance(modalRef.value)?.hide();
@@ -70,40 +71,18 @@ const links3 = [
   
 ]
 
+let showMessage = () => {
+  toastr.success('Ceci est un message', '', {timeOut: 100000});
+
+}
+
+
 </script>
 
 <template>
   <header>
 
-    <div class="nav-message-container" style="display: none">
-      <div class="nav-message">
-        <div class="message">
-          Ceci est un message sur le site
-        </div>
-        <div class="close">
-          <button class="bttn-close">
-            <va-icon name="close" />
-          </button>  
-        </div>
-      </div>
-    </div>
-
     <Menu />
-
-    <div class="flash-message-container" style="display: none">
-      <div class="flash-message">
-        <div class="message-flash-message">
-          <span class="span-flash-message">Error</span>
-          There is an error !
-        </div>
-
-        <div class="close-flash-message">
-          <button class="bttn-close">
-            <va-icon name="close" />
-          </button>  
-        </div>
-      </div>
-    </div>
 
     <div class="modal fade" id="ModalConnection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modalRef">
       <div class="modal-dialog">
@@ -129,6 +108,7 @@ const links3 = [
     <RouterView/>
   </main>
 
+  <button @click="showMessage">here</button>
 
   <Footer :links1="links1" :links2="links2" :links3="links3"/>
 

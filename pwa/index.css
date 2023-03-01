@@ -221,6 +221,42 @@ button.bttn-drk-out:active, a.bttn-drk-out:active {
     top: 2px;
 }
 
+/* White button */
+button.bttn-yt, a.bttn-yt {
+    background: #ffffff;
+    color: #000000;
+}
+  
+button.bttn-yt:hover, a.bttn-yt:hover {
+    background: #d6d6d6;
+    color: #000000;
+}
+  
+button.bttn-yt:active, a.bttn-yt:active {
+    background: #d6d6d6;
+    color: #000000;
+    top: 2px;
+}
+
+/* Outline White button */
+button.bttn-yt-out, a.bttn-yt-out {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+  
+button.bttn-yt-out:hover, a.bttn-yt-out:hover {
+    background: #0000002f;
+    color: #ffffff;
+
+}
+  
+button.bttn-yt-out:active, a.bttn-yt-out:active {
+    background: #0000002f;
+    color: #ffffff;
+    top: 2px;
+}
+
 /* Button Close */
 
 button.bttn-close, a.bttn-close {
@@ -233,4 +269,26 @@ button.bttn-close, a.bttn-close {
     letter-spacing: 1px;
     outline: none;
     position: relative;
-  }
+}
+
+
+
+  .toast {
+    background-color: #030303 !important;
+}
+
+.toast-success {
+    background-color: #51A351 !important;
+}
+
+.toast-error {
+    background-color: #BD362F !important;
+}
+
+.toast-info {
+    background-color: #2F96B4 !important;
+}
+
+.toast-warning {
+    background-color: #F89406 !important;
+}
