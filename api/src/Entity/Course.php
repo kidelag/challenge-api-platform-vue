@@ -59,13 +59,13 @@ class Course
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private string|null|\DateTimeInterface $createdAt = 'NOW';
+    private string|\DateTimeInterface $createdAt;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private string|null|\DateTimeInterface $updated_at = 'NOW';
+    private string|\DateTimeInterface $updated_at;
 
     #[ORM\Column]
-    private ?bool $valid = null;
+    private ?bool $valid = false;
 
     #[ORM\ManyToOne(inversedBy: 'courses')]
     #[ORM\JoinColumn(nullable: false)]
@@ -88,6 +88,8 @@ class Course
         $this->comments = new ArrayCollection();
         $this->questions = new ArrayCollection();
         $this->userCourses = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updated_at = new \DateTime();
     }
 
     public function getId(): ?int
