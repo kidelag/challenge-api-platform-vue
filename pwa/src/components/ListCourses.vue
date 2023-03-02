@@ -43,13 +43,14 @@ watchEffect(() => {
         padding: 2rem 0;
     }
 
-@media (min-width: 1280px) {
+@media (min-width: 768px){
     div.wrapper {
         margin: auto;
-        max-width: 1280px;
+        max-width: 768px;
         width: 100%;
     }
 }
+
 @media (min-width: 992px){
     div.wrapper {
         margin: auto;
@@ -57,10 +58,11 @@ watchEffect(() => {
         width: 100%;
     }
 }
-@media (min-width: 768px){
+
+@media (min-width: 1280px) {
     div.wrapper {
         margin: auto;
-        max-width: 768px;
+        max-width: 1280px;
         width: 100%;
     }
 }
