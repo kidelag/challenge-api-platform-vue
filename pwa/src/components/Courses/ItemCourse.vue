@@ -18,7 +18,7 @@ const props = defineProps({
   }
 });
 
-const link = "/course/" + props.id;
+const link = "/detail/" + props.id;
 
 </script>
 
