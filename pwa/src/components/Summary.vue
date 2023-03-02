@@ -19,7 +19,7 @@ const content = [
   
 ]
 
-const sums = Object.values(content).reduce((acc, {price}) => acc + price , 0)
+const sums = Object.values(content).reduce((acc, {price}) => acc + price , 0);
 
 
 </script>
