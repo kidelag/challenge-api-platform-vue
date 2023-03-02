@@ -47,25 +47,27 @@ div.container {
         flex-wrap: wrap;
         justify-content: space-around;
     }
-}
+  }
+  
+  @media (min-width: 800px){
+    div.container{
+      max-width: 800px;
+      margin: auto;
+      width: 100%;
+    }
+  }
 
-@media (min-width: 1500px) {
+  @media (min-width: 1100px){
+    div.container{
+      max-width: 1100px;
+      margin: auto;
+      width: 100%;
+    }
+  }
+  
+  @media (min-width: 1500px) {
   div.container{
     max-width: 1500px;
-    margin: auto;
-    width: 100%;
-  }
-}
-@media (min-width: 1100px){
-  div.container{
-    max-width: 1100px;
-    margin: auto;
-    width: 100%;
-  }
-}
-@media (min-width: 800px){
-  div.container{
-    max-width: 800px;
     margin: auto;
     width: 100%;
   }
