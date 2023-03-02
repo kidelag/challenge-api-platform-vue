@@ -42,10 +42,12 @@ const handleLogout = () => {
 
 
       <div class="item-nav left">
-        <button class="bttn bttn-cart">
-          <va-icon name="shopping_cart" style="position: absolute;"/>
-          <div class="sc-count">10</div>
-        </button>
+        <RouterLink to="/summary" style="color: black;">
+          <button class="bttn bttn-cart">
+            <va-icon name="shopping_cart" style="position: absolute;"/>
+            <div class="sc-count">10</div>
+          </button>
+        </RouterLink>
 
         <div class="role left-item" v-if="store.user.isAdmin && store.user.isConnected">Admin</div>
         <div class="role left-item" v-if="store.user.isTeacherValid && store.user.isConnected">Professeur</div>
