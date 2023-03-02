@@ -32,8 +32,6 @@ watchEffect(() => {
         <div class="wrapper-item" v-for="item in validItems">
             <ItemCourse :title="item.title" :description="item.description" :id="item.id"/>
         </div>
-
-
     </div>
 </template>
 

@@ -47,6 +47,11 @@ const router = createRouter({
       name: "validate",
       component: () => import("../components/Validate.vue"),
     },
+    {
+      path: "/summary",
+      name: "summary",
+      component: () => import('../components/Summary.vue'),
+    },
   ],
 });
 

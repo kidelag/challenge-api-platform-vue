@@ -58,19 +58,17 @@ a {
         }
 
         div.right-box {
-            padding: 0 1.5rem;
+            padding: 1rem 1.5rem;
             color: #000;
             width: 100%;
 
             .title-item {
-                // font-family: Inter, Inter-Bold;
                 font-size: 1rem;
                 letter-spacing: 0px;
                 line-height: 24px;
                 font-weight: 700;
             }
             .description-item {
-                // font-family: Inter, Inter-Regular;
                 font-size: 1rem;
                 letter-spacing: 0px;
                 line-height: 26px;
@@ -78,7 +76,6 @@ a {
                 display: block;
             }
             .check {
-                // position: absolute;
                 display: flex;
                 justify-content: end;
                 color: #fff;
