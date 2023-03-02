@@ -89,22 +89,6 @@ let cnt = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam d
   }
 }
 
-@media (min-width: 1280px) {
-  div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-  }
-}
-@media (min-width: 992px){
-  div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
-    max-width: 992px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-  }
-}
 @media (min-width: 768px){
   div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
     max-width: 768px;
@@ -114,6 +98,24 @@ let cnt = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam d
   }
 }
 
+@media (min-width: 992px){
+  div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
+    max-width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 1280px) {
+  div.first-home-item > *, div.second-home-item > *, div.third-home-item > * {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
 
 
 </style>
