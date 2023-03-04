@@ -9,7 +9,6 @@ const validItems = ref({});
 
 watchEffect(() => {
   items.value = store.courses.list;
-  console.log(items.value);
 
   for (const item in items.value) {
     if (items.value[item].valid) {
@@ -73,6 +72,6 @@ let content;
 .wrapperItems {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 </style>
