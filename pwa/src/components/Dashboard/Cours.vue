@@ -166,8 +166,6 @@ const handleCreate = () => {
     content: createEditor.value.getHTML(),
     valid: false,
     userId: "users/" + store.user.id,
-    createdAt: "NOW",
-    updatedAt: "NOW",
   };
 
   axios

@@ -25,12 +25,9 @@ const initBody = {
   accountIban: "",
   accountBankName: "",
   userId: "users/" + store.user.id,
-  createdAt: "NOW",
-  updatedAt: "NOW",
 };
 const requestBody = ref({ ...initBody });
-const { user_id, valid, userId, createdAt, updatedAt, ...requestInput } =
-  requestBody.value;
+const { user_id, valid, userId, ...requestInput } = requestBody.value;
 
 const isDifferent = computed(() => {
   return Object.keys(currentUser.value).some(
