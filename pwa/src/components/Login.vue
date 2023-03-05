@@ -50,8 +50,8 @@ const props = defineProps({
 });
 
 const initObject = {
-  mail: "test@test.com",
-  password: "test",
+  mail: "",
+  password: "",
 };
 const initialValue = {
   ...initObject,
