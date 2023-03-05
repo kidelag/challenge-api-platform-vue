@@ -57,16 +57,12 @@ use Symfony\Component\Validator\Constraints as Assert;
     read: false,
     name: 'request_password'
 )]
-#[Put(
+#[Patch(
     controller: UpdateUserController::class,
-    security: 'is_granted("ROLE_ADMIN") or object === user'
+    // security: 'is_granted("ROLE_ADMIN") or object === user'
 )]
 #[Delete(
     security: 'is_granted("ROLE_ADMIN")'
-)]
-
-#[Patch(
-    security: 'is_granted("ROLE_ADMIN") or object === user'
 )]
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -106,15 +102,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private string|null|\DateTimeInterface $createdAt = 'NOW';
+    private string|\DateTimeInterface $createdAt;
 
     #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private string|null|\DateTimeInterface $updatedAt = 'NOW';
+    private string|\DateTimeInterface $updatedAt;
 
     #[Groups(['read'])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $lastActivity = null;
+    private ?\DateTimeInterface $lastActivity;
 
     #[Groups(['read'])]
     #[ORM\Column]
@@ -132,6 +128,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->courses = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->userCourses = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+        $this->lastActivity = new \DateTime();
     }
 
     public function getId(): ?int

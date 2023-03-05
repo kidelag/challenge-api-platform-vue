@@ -49,7 +49,6 @@ const handleBuy = () => {
     )
     .then(() => {
       setBuyCourse(courseId);
-      console.log("cours acheté");
     })
     .catch((err) => {
       console.log(err);

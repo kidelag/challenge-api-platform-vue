@@ -15,7 +15,6 @@ const validItems = ref({});
 
 watchEffect(() => {
   items.value = store.courses.list;
-  console.log(items.value);
 
   for (const item in items.value) {
     if (items.value[item].valid) {

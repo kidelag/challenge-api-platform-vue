@@ -67,10 +67,10 @@ onMounted(() => {
 });
 
 const initialValue = {
-  password: "",
-  mail: "",
-  firstname: "",
-  lastname: "",
+  password: "test",
+  mail: "test@test.com",
+  firstname: "test",
+  lastname: "test",
 };
 
 const handleSubmit = () => {
