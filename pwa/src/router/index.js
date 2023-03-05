@@ -12,37 +12,37 @@ const router = createRouter({
     {
       path: "/db",
       name: "db",
-      component: () => import("../components/Dashboardv2/Dashboard.vue"),
+      component: () => import("../components/Dashboard/Dashboard.vue"),
     },
     {
       path: "/db/user-list",
       name: "db-user-list",
-      component: () => import("../components/Dashboardv2/UserList.vue"),
+      component: () => import("../components/Dashboard/UserList.vue"),
     },
     {
       path: "/db/course-list",
       name: "db-course-list",
-      component: () => import("../components/Dashboardv2/CourseList.vue"),
+      component: () => import("../components/Dashboard/CourseList.vue"),
     },
     {
       path: "/db/to-valid-course",
       name: "db-to-valid-course",
-      component: () => import("../components/Dashboardv2/CoursesToValidate.vue"),
+      component: () => import("../components/Dashboard/CoursesToValidate.vue"),
     },
     {
       path: "/db/comm-list",
       name: "db-comm-list",
-      component: () => import("../components/Dashboardv2/CommList.vue"),
+      component: () => import("../components/Dashboard/CommList.vue"),
     },
     {
       path: "/db/to-valid-comm",
       name: "db-to-valid-comm",
-      component: () => import("../components/Dashboardv2/CommToValidate.vue"),
+      component: () => import("../components/Dashboard/CommToValidate.vue"),
     },
     {
       path: "/db/user/:id",
       name: "user_page",
-      component: () => import("../components/Dashboardv2/UserPage.vue"),
+      component: () => import("../components/Dashboard/UserPage.vue"),
     },
     {
       path: "/dashboard",
