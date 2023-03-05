@@ -1,11 +1,17 @@
 <script setup>
 
+import { RouterLink } from "vue-router";
+
 const props = defineProps({
   text: {
     type: String,
     required: true,
   },
   icon: {
+    type: String,
+    required: true,
+  },
+  link: {
     type: String,
     required: true,
   }
@@ -17,7 +23,9 @@ const props = defineProps({
 
 <template>
     <div>
-      <button class="bttn link_tab" type="button">
+      <!--<button class="bttn link_tab" type="button">-->
+      <RouterLink :to="link">
+
         <div class="container-tab">
 
           <va-icon :name="icon" size="small"/>
@@ -25,7 +33,8 @@ const props = defineProps({
           
         </div>
         <va-icon name="chevron_right" />
-      </button>
+      </RouterLink>
+      <!--</button>-->
     </div>
 </template>
 
@@ -33,35 +42,17 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 
-// div.container-tab {
-//   display: flex;
-//   justify-content: space-between;
-  
-//   button.link_tab {
-//     font-size: 12px;
-//     width: auto;
 
-//     > i {
-//       margin-right: 0.3rem;
-//     }
-//   }
-//   // div.right-div {
-//   //   margin-right: 1rem;
-//   // }
-//    > i {
-//     margin-right: 1rem;
-//    }
-  
-// }
-
-button.link_tab {
+a {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  text-decoration: none;
+  color: white;
   
   div.container-tab {
-    font-size: 12px;
-    width: 2rem;
+    font-size: 15px;
+    // width: 2rem;
     display: flex;
 
     > i {

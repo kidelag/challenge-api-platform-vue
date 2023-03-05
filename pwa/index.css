@@ -99,7 +99,9 @@ button.bttn-prim:active, a.bttn-prim:active {
 button.bttn-prim-out, a.bttn-prim-out {
     background: transparent;
     color: #3498db;
-    border: 1px solid #3498db;
+    outline: 1px solid #3498db;
+    outline-offset: -1px;
+
 }
 
 button.bttn-prim-out:hover, a.bttn-prim-out:hover {
@@ -135,7 +137,9 @@ button.bttn-succ:active, a.bttn-succ:active {
 button.bttn-succ-out, a.bttn-succ-out {
     background: transparent;
     color: #2ecc71;
-    border: 1px solid #2ecc71;
+    outline: 1px solid #2ecc71;
+    outline-offset: -1px;
+
 }
 
 button.bttn-succ-out:hover, a.bttn-succ-out:hover {
@@ -170,7 +174,9 @@ button.bttn-dng:active, a.bttn-dng:active {
 button.bttn-dng-out, a.bttn-dng-out {
     background: transparent;
     color: #e74c3c;
-    border: 1px solid #e74c3c;
+    outline: 1px solid #e74c3c;
+    outline-offset: -1px;
+
 }
   
 button.bttn-dng-out:hover, a.bttn-dng-out:hover {
@@ -184,6 +190,43 @@ button.bttn-dng-out:active, a.bttn-dng-out:active {
     top: 2px;
 }
 
+  
+/* Warning button */
+button.bttn-wng, a.bttn-wng {
+    background: #e7b93c;
+    color: #fff;
+}
+  
+button.bttn-wng:hover, a.bttn-wng:hover {
+    background: #c09d2b;
+    color: #fff;
+}
+  
+button.bttn-wng:active, a.bttn-wng:active {
+    background: #c09d2b;
+    color: #fff;
+    top: 2px;
+}
+
+/* Outline Warning button */
+button.bttn-wng-out, a.bttn-wng-out {
+    background: transparent;
+    color: #e7b93c;
+    outline: 1px solid #e7b93c;
+    outline-offset: -1px;
+
+}
+  
+button.bttn-wng-out:hover, a.bttn-wng-out:hover {
+    background: #0000002f;
+    color: #e7b93c;
+}
+  
+button.bttn-wng-out:active, a.bttn-wng-out:active {
+    background: #0000002f;
+    color: #e7b93c;
+    top: 2px;
+}
 
 /* Dark button */
 button.bttn-drk, a.bttn-drk {
@@ -206,7 +249,8 @@ button.bttn-drk:active, a.bttn-drk:active {
 button.bttn-drk-out, a.bttn-drk-out {
     background: transparent;
     color: #34495e;
-    border: 1px solid #34495e;
+    outline: 1px solid #34495e;
+    outline-offset: -1px;
 }
   
 button.bttn-drk-out:hover, a.bttn-drk-out:hover {
@@ -242,7 +286,8 @@ button.bttn-yt:active, a.bttn-yt:active {
 button.bttn-yt-out, a.bttn-yt-out {
     background: transparent;
     color: #ffffff;
-    border: 1px solid #ffffff;
+    outline: 1px solid #ffffff;
+    outline-offset: -1px;
 }
   
 button.bttn-yt-out:hover, a.bttn-yt-out:hover {
